@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "32797186943",
+    "project_id": "asu-car-pool",
+    "storage_bucket": "asu-car-pool.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32797186943:android:2a53c0a8f45a3695cfd84a",
+        "android_client_info": {
+          "package_name": "com.example.asu_carpool"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtbplptsLnuiBya3xj074D-fO6Pue9ZUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
