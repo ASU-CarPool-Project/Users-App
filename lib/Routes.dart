@@ -10,6 +10,9 @@ import 'auth.dart';
 import 'Profile.dart';
 import 'about.dart';
 
+String username = "";
+String phone = "";
+
 class Routes extends StatefulWidget {
   const Routes({Key? key}) : super(key: key);
 
@@ -38,6 +41,8 @@ class _RoutesState extends State<Routes> {
       setState(() {
         _user = user;
         _userData = userData.data();
+        username = _userData!['firstName'] +" "+ _userData!['lastName'];
+        phone = _userData!['phone'];
       });
     }
   }

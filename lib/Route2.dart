@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'RoutesDesc.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Route2 extends StatefulWidget {
   const Route2({Key? key}) : super(key: key);
@@ -9,39 +9,10 @@ class Route2 extends StatefulWidget {
   State<Route2> createState() => _Route2State();
 }
 
-List<Map<String, String>> Routes2 = [
-  {
-    "Route": "From Gate 2 to Abbasseya",
-    "Name": "Philo",
-    "Car": "Toyota Corolla",
-    "Capacity": "4",
-    "Time": "6:30",
-    "Waiting Time": "5 Minutes",
-    "Fee": "10\$"
-  },
-  {
-    "Route": "From Gate 4 to Abbasseya",
-    "Name": "Omar",
-    "Car": "Optra",
-    "Capacity": "4",
-    "Time": "6:30",
-    "Waiting Time": "5 Minutes",
-    "Fee": "10\$"
-  },
-  {
-    "Route": "From Gate 2 to Settlement",
-    "Name": "Osama",
-    "Car": "Honda Civic",
-    "Capacity": "3",
-    "Time": "6:30",
-    "Waiting Time": "5 Minutes",
-    "Fee": "30\$"
-  },
-];
-
-
-
 class _Route2State extends State<Route2> {
+  DatabaseReference tripsReference =
+  FirebaseDatabase.instance.ref().child('FromCollege');
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,61 +20,110 @@ class _Route2State extends State<Route2> {
       child: Padding(
         padding: EdgeInsets.all(20),
         child: Center(
-          child: ListView.builder(
-            itemCount: Routes2.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.all(10),
-                child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RoutesDesc(
-                              card: Card(
-                                  color: Colors.white70,
+          child: StreamBuilder(
+            stream: tripsReference.onValue,
+            builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+              if (snapshot.hasData &&
+                  !snapshot.hasError &&
+                  snapshot.data!.snapshot.value != null) {
+                Map<dynamic, dynamic>? trips =
+                snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
+                List<MapEntry> tripList = trips?.entries.toList() ?? [];
+
+                return ListView.builder(
+                  itemCount: trips?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.all(10),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RoutesDesc(
+                                card: Card(
                                   child: Padding(
-                                    padding: EdgeInsets.all(20),
-                                    child: Column(
-                                      children: [
-                                        Text("Route: ${Routes2[index]["Route"]}"),
-                                        Text("Name: ${Routes2[index]["Name"]}"),
-                                        Text("Car: ${Routes2[index]["Car"]}"),
-                                        Text("Capacity: ${Routes2[index]["Capacity"]}"),
-                                        Text("Time: ${Routes2[index]["Time"]}"),
-                                        Text("Waiting Time: ${Routes2[index]["Waiting Time"]}"),
-                                        Text("Fee: ${Routes2[index]["Fee"]}"),
-                                      ],
-                                    ),
-                                  )
-                              )
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(children: [
+                                      Container(
+                                        color: Colors.white70,
+                                        child: Column(
+                                          children: [
+                                            ListTile(
+                                              leading: Icon(Icons.directions),
+                                              title: Text(
+                                                  "Direction: ${tripList[index].value["direction"]}"),
+                                              subtitle: Text(
+                                                  "Route: ${tripList[index].value["route"]}"),
+                                            ),
+                                            ListTile(
+                                              leading: Icon(Icons.access_time),
+                                              title: Text(
+                                                  "Time: ${tripList[index].value["time"]}"),
+                                              subtitle: Text(
+                                                  "Waiting Time: ${tripList[index].value["waiting"]}"),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        color: Colors.white,
+                                        child: Column(children: [
+                                          ListTile(
+                                            leading: Icon(Icons.person),
+                                            title: Text(
+                                                "Name: ${tripList[index].value["name"]}"),
+                                            subtitle: Text(
+                                                "Phone: ${tripList[index].value["phone"]}"),
+                                          ),
+                                          ListTile(
+                                            leading: Icon(Icons.car_rental),
+                                            title: Text(
+                                                "Car: ${tripList[index].value["car"]}"),
+                                            subtitle: Text(
+                                                "Capacity: ${tripList[index].value["capacity"]}"),
+                                          ),
+                                        ]),
+                                      ),
+                                      Container(
+                                        color: Colors.white70,
+                                        child: Column(
+                                          children: [
+                                            ListTile(
+                                              leading: Icon(Icons.attach_money),
+                                              title: Text(
+                                                  "Fees: ${tripList[index].value["fee"]}"),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          color: Colors.white70,
+                          child: ListTile(
+                            tileColor: Colors.transparent,
+                            leading: const Icon(Icons.pin_drop_sharp),
+                            title: Text(
+                                "Route: ${tripList[index].value["route"]}"),
+                            subtitle: Text(
+                                "Driver: ${tripList[index].value["name"]}"),
                           ),
                         ),
-                      );
-                    },
-                  child: Card(
-                    color: Colors.white70,
-                    child: ListTile(
-                      tileColor: Colors.transparent,
-                      leading: const Icon(Icons.pin_drop_sharp),
-                      title: Text("${Routes2[index]["Route"]}"),
-                      subtitle: Text("Driver: ${Routes2[index]["Name"]}"),
-                    ),
-                  ),
-                    // child: Card(
-                    //     color: Colors.white70,
-                    //     child: Padding(
-                    //       padding: EdgeInsets.all(20),
-                    //       child: Column(
-                    //         children: [
-                    //           Text("Route: ${Routes2[index]["Route"]}"),
-                    //           Text("Name: ${Routes2[index]["Name"]}"),
-                    //         ],
-                    //       ),
-                    //     )
-                    // )
-                ),
-              );
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
             },
           ),
         ),

@@ -50,6 +50,8 @@ class DefaultFirebaseOptions {
     projectId: 'asu-car-pool',
     authDomain: 'asu-car-pool.firebaseapp.com',
     storageBucket: 'asu-car-pool.appspot.com',
+    databaseURL:
+        'https://asu-carpool-driver-default-rtdb.europe-west1.firebasedatabase.app/',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -58,6 +60,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '32797186943',
     projectId: 'asu-car-pool',
     storageBucket: 'asu-car-pool.appspot.com',
+    databaseURL:
+        'https://asu-carpool-driver-default-rtdb.europe-west1.firebasedatabase.app/',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -67,6 +71,8 @@ class DefaultFirebaseOptions {
     projectId: 'asu-car-pool',
     storageBucket: 'asu-car-pool.appspot.com',
     iosBundleId: 'com.example.asuCarpool',
+    databaseURL:
+        'https://asu-carpool-driver-default-rtdb.europe-west1.firebasedatabase.app/',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -76,5 +82,7 @@ class DefaultFirebaseOptions {
     projectId: 'asu-car-pool',
     storageBucket: 'asu-car-pool.appspot.com',
     iosBundleId: 'com.example.asuCarpool.RunnerTests',
+    databaseURL:
+        'https://asu-carpool-driver-default-rtdb.europe-west1.firebasedatabase.app/',
   );
 }
