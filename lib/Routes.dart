@@ -173,7 +173,6 @@ class _RoutesState extends State<Routes> {
                       );
                     },
                   ),
-
                   Divider(),
                   ListTile(
                     // tileColor: Theme.of(context).colorScheme.secondary,
@@ -188,6 +187,22 @@ class _RoutesState extends State<Routes> {
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => about()),
                       );
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                    // tileColor: Theme.of(context).colorScheme.secondary,
+                    leading: Icon(Icons.question_mark,
+                        color: Colors.indigo),
+                    title: Text(
+                      "Sign Out",
+                      style: TextStyle(
+                          color: Colors.indigo),
+                    ),
+                    onTap: () {
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(builder: (context) => about()),
+                      // );
                     },
                   ),
                 ],

@@ -11,7 +11,7 @@ class Route2 extends StatefulWidget {
 
 class _Route2State extends State<Route2> {
   DatabaseReference tripsReference =
-  FirebaseDatabase.instance.ref().child('FromCollege');
+  FirebaseDatabase.instance.ref().child("FromCollege");
 
   @override
   Widget build(BuildContext context) {

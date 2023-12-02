@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'MyWidgets.dart';
 import 'RoutesDesc.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -11,7 +12,7 @@ class Route1 extends StatefulWidget {
 
 class _Route1State extends State<Route1> {
   DatabaseReference tripsReference =
-      FirebaseDatabase.instance.ref().child('ToCollege');
+      FirebaseDatabase.instance.ref().child("ToCollege");
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +122,12 @@ class _Route1State extends State<Route1> {
                 );
               } else {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        textLargeTitle("Searching for trips..."),
+                        const CircularProgressIndicator()
+                      ]),
                 );
               }
             },

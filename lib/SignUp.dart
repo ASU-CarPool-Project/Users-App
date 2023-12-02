@@ -4,6 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'Routes.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -44,6 +46,9 @@ class _SignUpState extends State<SignUp> {
         'email': _controllerEmail.text,
         'phone': _controllerPhone.text,
       });
+
+      // If sign-up is successful, navigate to the next screen (Routes)
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Routes()),);
 
       print(
           "User signed up successfully with UID: ${userCredential.user!.uid}");

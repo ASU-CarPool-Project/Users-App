@@ -68,7 +68,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo,
-        title: textPageTitle("ASU Car Pool"),
+        title: textPageTitle("ASU CAR POOL"),
         centerTitle: true,
       ),
       body: Container(
@@ -78,18 +78,9 @@ class _SignInState extends State<SignIn> {
           child: Center(
             child: ListView(
               children: [
-                const Center(
-                  child: Text(
-                    "Sign in",
-                    style: TextStyle(
-                      fontSize: 34,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.indigo,
-                    ),
-                  ),
-                ),
+                Image.asset('assets/logos/users_carpool.jpeg', width: 200, height: 200,),
                 const SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 Form(
                   key: formKey,
