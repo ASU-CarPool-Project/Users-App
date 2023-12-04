@@ -31,17 +31,8 @@ class _RequestsState extends State<Requests> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
-        leading: IconButton(
-          icon: const Icon(
-            IconData(0xe093,
-                fontFamily: 'MaterialIcons', matchTextDirection: true),
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        backgroundColor: colorsPrimary,
+        leading: iconBack(context),
         title: textPageTitle("Your Requests"),
         centerTitle: true,
       ),

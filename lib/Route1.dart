@@ -106,13 +106,13 @@ class _Route1State extends State<Route1> {
                           );
                         },
                         child: Card(
-                          color: Colors.white70,
+                          color: colorsRoute1,
                           child: ListTile(
                             tileColor: Colors.transparent,
-                            leading: const Icon(Icons.pin_drop_sharp),
-                            title: Text(
+                            leading: const Icon(Icons.pin_drop_sharp, color: Colors.white,),
+                            title: textPageTitle(
                                 "Route: ${tripList[index].value["route"]}"),
-                            subtitle: Text(
+                            subtitle: textPageTitle(
                                 "Driver: ${tripList[index].value["name"]}"),
                           ),
                         ),

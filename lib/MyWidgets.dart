@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
+Color? colorsPrimary = Colors.indigo;
+Color? colorsRoute1 = Colors.indigoAccent;
+Color? colorsRoute2 = Colors.cyan;
+
+
 Widget textButtons(String text) {
   return Text(
     text,
     style: const TextStyle(
-      fontSize: 18.0,
+      fontSize: 16.0,
       color: Colors.white,
     ),
   );

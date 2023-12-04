@@ -15,20 +15,8 @@ class _aboutState extends State<about> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.indigo,
-        leading: IconButton(
-          icon: const Icon(
-            IconData(
-              0xe093,
-              fontFamily: 'MaterialIcons',
-              matchTextDirection: true,
-            ),
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        backgroundColor: colorsPrimary,
+        leading: iconBack(context),
         title: textPageTitle("About"),
         centerTitle: true,
       ),
@@ -48,17 +36,17 @@ class _aboutState extends State<about> {
                       child: Image.asset("assets/logos/flutter.png",
                           height: 150, width: 150),
                     ),
-                    const Padding(
+                    Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Welcome to my Car pool app!",
-                          style: TextStyle(fontSize: 20, color: Colors.indigo),
+                          style: TextStyle(fontSize: 20, color: colorsPrimary),
                         )),
-                    const Padding(
+                    Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "This app was built as a final project\nfor my flutter course",
-                          style: TextStyle(fontSize: 15, color: Colors.indigo),
+                          style: TextStyle(fontSize: 15, color: colorsPrimary),
                         )),
                   ],
                 ),

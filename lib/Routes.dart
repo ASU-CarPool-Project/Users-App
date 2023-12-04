@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:asu_carpool/Route2.dart';
 import 'MyWidgets.dart';
+import 'SignIn.dart';
 import 'auth.dart';
 import 'Profile.dart';
 import 'about.dart';
@@ -35,13 +36,16 @@ class _RoutesState extends State<Routes> {
   Future<void> _getUserInfo() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      DocumentSnapshot<Map<String, dynamic>> userData =
-      await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+      DocumentSnapshot<Map<String, dynamic>> userData = await FirebaseFirestore
+          .instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
 
       setState(() {
         _user = user;
         _userData = userData.data();
-        username = _userData!['firstName'] +" "+ _userData!['lastName'];
+        username = _userData!['firstName'] + " " + _userData!['lastName'];
         phone = _userData!['phone'];
       });
     }
@@ -56,10 +60,11 @@ class _RoutesState extends State<Routes> {
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Colors.indigo,
+            backgroundColor: colorsPrimary,
             title: textPageTitle("Available Routes"),
             centerTitle: true,
-            bottom: const TabBar(
+            bottom: TabBar(
+              indicatorColor: Colors.white,
               tabs: [
                 Tab(
                   icon: Column(
@@ -90,7 +95,7 @@ class _RoutesState extends State<Routes> {
                         color: Colors.white,
                       ),
                       Text(
-                        'To Home',
+                        'From Faculty',
                         style: TextStyle(
                           color: Colors.white,
                         ),
@@ -109,7 +114,8 @@ class _RoutesState extends State<Routes> {
                 children: [
                   UserAccountsDrawerHeader(
                     accountName: _userData != null
-                        ? Text("${_userData!['firstName'] +" "+ _userData!['lastName']}")
+                        ? Text(
+                            "${_userData!['firstName'] + " " + _userData!['lastName']}")
                         : Text("Finn The Manager"),
                     accountEmail: _userData != null
                         ? Text("${_userData!['email']}")
@@ -123,18 +129,17 @@ class _RoutesState extends State<Routes> {
                         backgroundImage: AssetImage('assets/logos/fin.png'),
                       ),
                     ),
-                    decoration: const BoxDecoration(
-                        color: Colors.indigo // Change the background color of the header
+                    decoration: BoxDecoration(
+                        color:
+                            colorsPrimary // Change the background color of the header
                         ),
                   ),
                   ListTile(
                     // tileColor: Theme.of(context).colorScheme.secondary,
-                    leading: const Icon(Icons.face,
-                        color: Colors.indigo),
-                    title: const Text(
+                    leading: Icon(Icons.face, color: colorsPrimary),
+                    title: Text(
                       "Profile",
-                      style: TextStyle(
-                          color: Colors.indigo),
+                      style: TextStyle(color: colorsPrimary),
                     ),
                     onTap: () {
                       Navigator.of(context).push(
@@ -145,12 +150,10 @@ class _RoutesState extends State<Routes> {
                   Divider(),
                   ListTile(
                     // tileColor: Theme.of(context).colorScheme.secondary,
-                    leading: Icon(Icons.list_alt_rounded,
-                        color: Colors.indigo),
+                    leading: Icon(Icons.list_alt_rounded, color: colorsPrimary),
                     title: Text(
                       "Your Requests",
-                      style: TextStyle(
-                          color: Colors.indigo),
+                      style: TextStyle(color: colorsPrimary),
                     ),
                     onTap: () {
                       Navigator.of(context).push(
@@ -158,30 +161,28 @@ class _RoutesState extends State<Routes> {
                       );
                     },
                   ),
+                  // Divider(),
+                  // ListTile(
+                  //   // tileColor: Theme.of(context).colorScheme.secondary,
+                  //   leading: const Icon(Icons.settings, color: Colors.indigo),
+                  //   title: Text(
+                  //     "Settings",
+                  //     style: TextStyle(
+                  //         color: Colors.indigo),
+                  //   ),
+                  //   onTap: () {
+                  //     Navigator.of(context).push(
+                  //       MaterialPageRoute(builder: (context) => settings()),
+                  //     );
+                  //   },
+                  // ),
                   Divider(),
                   ListTile(
                     // tileColor: Theme.of(context).colorScheme.secondary,
-                    leading: const Icon(Icons.settings, color: Colors.indigo),
-                    title: Text(
-                      "Settings",
-                      style: TextStyle(
-                          color: Colors.indigo),
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => settings()),
-                      );
-                    },
-                  ),
-                  Divider(),
-                  ListTile(
-                    // tileColor: Theme.of(context).colorScheme.secondary,
-                    leading: Icon(Icons.question_mark,
-                        color: Colors.indigo),
+                    leading: Icon(Icons.info, color: colorsPrimary),
                     title: Text(
                       "About",
-                      style: TextStyle(
-                          color: Colors.indigo),
+                      style: TextStyle(color: colorsPrimary),
                     ),
                     onTap: () {
                       Navigator.of(context).push(
@@ -192,17 +193,17 @@ class _RoutesState extends State<Routes> {
                   Divider(),
                   ListTile(
                     // tileColor: Theme.of(context).colorScheme.secondary,
-                    leading: Icon(Icons.question_mark,
-                        color: Colors.indigo),
+                    leading: Icon(Icons.question_mark, color: Colors.indigo),
                     title: Text(
                       "Sign Out",
-                      style: TextStyle(
-                          color: Colors.indigo),
+                      style: TextStyle(color: Colors.indigo),
                     ),
                     onTap: () {
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(builder: (context) => about()),
-                      // );
+                      signOut();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignIn()),
+                      );
                     },
                   ),
                 ],

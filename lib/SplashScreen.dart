@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'MyWidgets.dart';
+
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key);
 
@@ -10,7 +12,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           body: Center(
@@ -21,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Text(
                   "Loading",
                   style: TextStyle(
-                      color: Colors.indigo,
+                      color: colorsPrimary,
                       fontSize: 30,
                       fontStyle: FontStyle.italic),
                 ),

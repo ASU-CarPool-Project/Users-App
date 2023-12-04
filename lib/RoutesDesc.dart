@@ -20,7 +20,7 @@ class _RoutesDescState extends State<RoutesDesc> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.indigo,
+          backgroundColor: colorsPrimary,
           title: textPageTitle("Pickup Request"),
           centerTitle: true,
         ),

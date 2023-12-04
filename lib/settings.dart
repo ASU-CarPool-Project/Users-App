@@ -16,17 +16,8 @@ class _settingsState extends State<settings> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.indigo,
-        leading: IconButton(
-          icon: const Icon(
-            IconData(0xe093,
-                fontFamily: 'MaterialIcons', matchTextDirection: true),
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        backgroundColor: colorsPrimary,
+        leading: iconBack(context),
         title: textPageTitle("Settings"),
         centerTitle: true,
       ),

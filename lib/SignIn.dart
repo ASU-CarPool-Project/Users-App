@@ -67,7 +67,7 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
+        backgroundColor: colorsPrimary,
         title: textPageTitle("ASU CAR POOL"),
         centerTitle: true,
       ),
@@ -133,7 +133,7 @@ class _SignInState extends State<SignIn> {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.indigo),
+                        MaterialStateProperty.all<Color>(colorsPrimary!),
                   ),
                   child: textButtons("Sign In"),
                   onPressed: _signIn,

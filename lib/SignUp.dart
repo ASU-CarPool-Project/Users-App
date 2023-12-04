@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'Routes.dart';
 
 class SignUp extends StatefulWidget {
@@ -36,6 +35,8 @@ class _SignUpState extends State<SignUp> {
           email: _controllerEmail.text.trim(),
           password: _controllerPassword.text);
 
+      print(userCredential);
+
       // Store additional user data in Firestore
       await FirebaseFirestore.instance
           .collection('users')
@@ -50,10 +51,9 @@ class _SignUpState extends State<SignUp> {
       // If sign-up is successful, navigate to the next screen (Routes)
       Navigator.push(context, MaterialPageRoute(builder: (context) => Routes()),);
 
-      print(
-          "User signed up successfully with UID: ${userCredential.user!.uid}");
+      print("User signed up successfully with UID: ${userCredential.user!.uid}");
       Fluttertoast.showToast(
-        msg: "Sign In Successful!",
+        msg: "Sign Up Successful!",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -76,7 +76,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
+        backgroundColor: colorsPrimary,
         title: textPageTitle("ASU Car Pool"),
         centerTitle: true,
       ),
@@ -87,13 +87,13 @@ class _SignUpState extends State<SignUp> {
           child: Center(
             child: ListView(
               children: [
-                const Center(
+                Center(
                   child: Text(
                     "Sign up",
                     style: TextStyle(
                       fontSize: 34,
                       fontWeight: FontWeight.bold,
-                      color: Colors.indigo,
+                      color: colorsPrimary,
                     ),
                   ),
                 ),
@@ -214,7 +214,7 @@ class _SignUpState extends State<SignUp> {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.indigo),
+                    MaterialStateProperty.all<Color>(colorsPrimary!),
                   ),
                   onPressed: _register,
                   child: textButtons("Sign Up"),

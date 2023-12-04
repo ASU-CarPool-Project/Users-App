@@ -26,8 +26,11 @@ class _ProfileState extends State<Profile> {
   Future<void> _getUserInfo() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      DocumentSnapshot<Map<String, dynamic>> userData =
-      await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+      DocumentSnapshot<Map<String, dynamic>> userData = await FirebaseFirestore
+          .instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
 
       setState(() {
         _user = user;
@@ -68,17 +71,8 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
-        leading: IconButton(
-          icon: const Icon(
-            IconData(0xe093,
-                fontFamily: 'MaterialIcons', matchTextDirection: true),
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        backgroundColor: colorsPrimary,
+        leading: iconBack(context),
         title: textPageTitle("Profile"),
         centerTitle: true,
       ),
@@ -91,7 +85,10 @@ class _ProfileState extends State<Profile> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (_userData != null)
-                  textPlace("Name: ", _userData!['firstName'] +" "+ _userData!['lastName'] ?? ''),
+                  textPlace(
+                      "Name: ",
+                      _userData!['firstName'] + " " + _userData!['lastName'] ??
+                          ''),
                 if (_userData != null)
                   textPlace("Email: ", _userData!['email'] ?? ''),
                 if (_userData != null)

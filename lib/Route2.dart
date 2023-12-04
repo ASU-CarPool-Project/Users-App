@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'MyWidgets.dart';
+import 'MyWidgets.dart';
 import 'RoutesDesc.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -105,13 +107,13 @@ class _Route2State extends State<Route2> {
                           );
                         },
                         child: Card(
-                          color: Colors.white70,
+                          color: colorsRoute2,
                           child: ListTile(
                             tileColor: Colors.transparent,
-                            leading: const Icon(Icons.pin_drop_sharp),
-                            title: Text(
+                            leading: const Icon(Icons.pin_drop_sharp, color: Colors.white,),
+                            title: textPageTitle(
                                 "Route: ${tripList[index].value["route"]}"),
-                            subtitle: Text(
+                            subtitle: textPageTitle(
                                 "Driver: ${tripList[index].value["name"]}"),
                           ),
                         ),
@@ -121,7 +123,12 @@ class _Route2State extends State<Route2> {
                 );
               } else {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        textLargeTitle("Searching for trips..."),
+                        const CircularProgressIndicator()
+                      ]),
                 );
               }
             },
