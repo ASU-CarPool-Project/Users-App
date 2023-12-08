@@ -1,8 +1,9 @@
-import 'package:asu_carpool/MyWidgets.dart';
+import 'package:asu_carpool/Routes.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'MyWidgets.dart';
 import 'Routes.dart';
 
 class SignUp extends StatefulWidget {
@@ -21,6 +22,7 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _controllerPassword = TextEditingController();
   final TextEditingController _controllerConfirmPassword =
   TextEditingController();
+  bool _isObscure = true;
 
   double boxHeight = 30.0;
   static final RegExp _emailRegExp =
@@ -83,6 +85,7 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
+
   /////////////////////////////////////////////////////////////////////////////
 
   @override
@@ -90,7 +93,8 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorsPrimary,
-        title: textPageTitle("ASU Car Pool"),
+        leading: iconBack(context),
+        title: textPageTitle("ASU CAR POOL - Driver"),
         centerTitle: true,
       ),
       body: Container(
@@ -118,9 +122,11 @@ class _SignUpState extends State<SignUp> {
                         children: [
                           TextFormField(
                             decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white70,
-                                hintText: "First Name"),
+                              filled: true,
+                              fillColor: Colors.white70,
+                              hintText: "First Name",
+                              icon: Icon(Icons.face_2),
+                            ),
                             controller: _controllerFirstName,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -135,9 +141,11 @@ class _SignUpState extends State<SignUp> {
                           ),
                           TextFormField(
                             decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white70,
-                                hintText: "Last Name"),
+                              filled: true,
+                              fillColor: Colors.white70,
+                              hintText: "Last Name",
+                              icon: Icon(Icons.face),
+                            ),
                             controller: _controllerLastName,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -152,9 +160,11 @@ class _SignUpState extends State<SignUp> {
                           ),
                           TextFormField(
                             decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white70,
-                                hintText: "Phone Number"),
+                              filled: true,
+                              fillColor: Colors.white70,
+                              hintText: "Phone Number",
+                              icon: Icon(Icons.phone),
+                            ),
                             controller: _controllerPhone,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -171,7 +181,8 @@ class _SignUpState extends State<SignUp> {
                             decoration: const InputDecoration(
                                 filled: true,
                                 fillColor: Colors.white70,
-                                hintText: "Email Address"),
+                                hintText: "Email Address",
+                                icon: Icon(Icons.email)),
                             controller: _controllerEmail,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -187,10 +198,25 @@ class _SignUpState extends State<SignUp> {
                             height: boxHeight,
                           ),
                           TextFormField(
-                            decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white70,
-                                hintText: "Password"),
+                            obscureText: _isObscure,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white70,
+                              hintText: "Password",
+                              icon: Icon(Icons.lock_outline_rounded),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isObscure
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isObscure = !_isObscure;
+                                  });
+                                },
+                              ),
+                            ),
                             controller: _controllerPassword,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -206,15 +232,31 @@ class _SignUpState extends State<SignUp> {
                             height: boxHeight,
                           ),
                           TextFormField(
-                            decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white70,
-                                hintText: "Confirm Password"),
+                            obscureText: _isObscure,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white70,
+                              hintText: "Confirm Password",
+                              icon: Icon(Icons.lock_outline_rounded),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _isObscure
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _isObscure = !_isObscure;
+                                  });
+                                },
+                              ),
+                            ),
                             controller: _controllerConfirmPassword,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return ("Re-enter Password");
-                              } else if (_controllerConfirmPassword.text != _controllerPassword.text) {
+                              } else if (_controllerConfirmPassword.text !=
+                                  _controllerPassword.text) {
                                 return "Passwords doesn't match";
                               } else {
                                 return null;

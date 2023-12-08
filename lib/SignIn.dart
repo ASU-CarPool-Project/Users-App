@@ -1,7 +1,7 @@
+import 'package:asu_carpool/Routes.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:asu_carpool/Routes.dart';
 import 'MyWidgets.dart';
 import 'SignUp.dart';
 
@@ -16,6 +16,7 @@ class _SignInState extends State<SignIn> {
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
+  bool _isObscure = true;
 
   /////////////////////////////////////////////////////////////////////////////
 
@@ -23,11 +24,11 @@ class _SignInState extends State<SignIn> {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-              email: controllerEmail.text.trim(),
-              password: controllerPassword.text);
+          email: controllerEmail.text.trim(),
+          password: controllerPassword.text);
 
       // If sign-in is successful, navigate to the next screen (Routes)
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Routes()),
       );
@@ -131,6 +132,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
+
   /////////////////////////////////////////////////////////////////////////////
 
   @override
@@ -138,7 +140,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorsPrimary,
-        title: textPageTitle("ASU CAR POOL"),
+        title: textPageTitle("ASU CAR POOL - Driver"),
         centerTitle: true,
       ),
       body: Container(
@@ -148,7 +150,11 @@ class _SignInState extends State<SignIn> {
           child: Center(
             child: ListView(
               children: [
-                Image.asset('assets/logos/users_carpool.jpeg', width: 200, height: 200,),
+                Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: Image.asset("assets/logos/users_carpool.jpeg",
+                      height: 200, width: 200),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -173,11 +179,11 @@ class _SignInState extends State<SignIn> {
                           icon: Icon(Icons.email),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       TextFormField(
-                        obscureText: true,
+                        obscureText: _isObscure, // _isObscure is a boolean variable to toggle visibility
                         controller: controllerPassword,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -186,14 +192,25 @@ class _SignInState extends State<SignIn> {
                             return null;
                           }
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white70,
                           border: OutlineInputBorder(),
                           hintText: 'Password',
                           icon: Icon(Icons.lock_outline_rounded),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isObscure ? Icons.visibility : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                          ),
                         ),
                       ),
+
                       const SizedBox(
                         height: 30,
                       ),
@@ -203,10 +220,10 @@ class _SignInState extends State<SignIn> {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(colorsPrimary!),
+                    MaterialStateProperty.all<Color>(colorsPrimary!),
                   ),
-                  child: textButtons("Sign In"),
                   onPressed: _signIn,
+                  child: textButtons("Sign In"),
                 ),
                 const SizedBox(
                   height: 10,
@@ -234,7 +251,7 @@ class _SignInState extends State<SignIn> {
                     );
                   },
                   child: const Text(
-                    "Don't have an account yet? Sign up here!",
+                    "Don't have an account yet? Sign up here",
                     style: TextStyle(
                       color: Colors.red,
                       decoration: TextDecoration.underline,
