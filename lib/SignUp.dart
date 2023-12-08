@@ -35,11 +35,12 @@ class _SignUpState extends State<SignUp> {
           email: _controllerEmail.text.trim(),
           password: _controllerPassword.text);
 
-      print(userCredential);
+      // Send verification email
+      await userCredential.user!.sendEmailVerification();
 
       // Store additional user data in Firestore
       await FirebaseFirestore.instance
-          .collection('users')
+          .collection('users_driver')
           .doc(userCredential.user!.uid)
           .set({
         'firstName': _controllerFirstName.text,
@@ -48,15 +49,13 @@ class _SignUpState extends State<SignUp> {
         'phone': _controllerPhone.text,
       });
 
-      // If sign-up is successful, navigate to the next screen (Routes)
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Routes()),);
-
-      print("User signed up successfully with UID: ${userCredential.user!.uid}");
+      print("Verification email sent to ${userCredential.user!.email}");
       Fluttertoast.showToast(
-        msg: "Sign Up Successful!",
-        toastLength: Toast.LENGTH_SHORT,
+        msg:
+        "Verification email sent to ${userCredential.user!.email}. Please check your email and verify your account.",
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
+        timeInSecForIosWeb: 4,
         backgroundColor: Colors.green,
         textColor: Colors.white,
         fontSize: 16.0,
@@ -64,9 +63,23 @@ class _SignUpState extends State<SignUp> {
 
       // Reset the form after successful signup
       _formKey.currentState!.reset();
+      // If sign-up is successful, navigate to home
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Routes()),
+      );
     } on FirebaseAuthException catch (e) {
       print("Failed to sign up: $e");
       // Handle sign-up errors here
+      Fluttertoast.showToast(
+        msg: "$e",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     }
   }
 

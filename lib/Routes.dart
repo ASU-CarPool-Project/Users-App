@@ -161,21 +161,6 @@ class _RoutesState extends State<Routes> {
                       );
                     },
                   ),
-                  // Divider(),
-                  // ListTile(
-                  //   // tileColor: Theme.of(context).colorScheme.secondary,
-                  //   leading: const Icon(Icons.settings, color: Colors.indigo),
-                  //   title: Text(
-                  //     "Settings",
-                  //     style: TextStyle(
-                  //         color: Colors.indigo),
-                  //   ),
-                  //   onTap: () {
-                  //     Navigator.of(context).push(
-                  //       MaterialPageRoute(builder: (context) => settings()),
-                  //     );
-                  //   },
-                  // ),
                   Divider(),
                   ListTile(
                     // tileColor: Theme.of(context).colorScheme.secondary,
