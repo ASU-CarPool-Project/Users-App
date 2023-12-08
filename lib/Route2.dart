@@ -44,6 +44,7 @@ class _Route2State extends State<Route2> {
                             MaterialPageRoute(
                               builder: (context) => RoutesDesc(
                                 card: Card(
+                                  color: colorsRoute2,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(children: [
@@ -54,16 +55,16 @@ class _Route2State extends State<Route2> {
                                             ListTile(
                                               leading: Icon(Icons.directions),
                                               title: Text(
-                                                  "Direction: ${tripList[index].value["direction"]}"),
+                                                  "${tripList[index].value["direction"]} - ${tripList[index].value["gate"]}"),
                                               subtitle: Text(
                                                   "Route: ${tripList[index].value["route"]}"),
                                             ),
                                             ListTile(
                                               leading: Icon(Icons.access_time),
-                                              title: Text(
-                                                  "Time: ${tripList[index].value["time"]}"),
-                                              subtitle: Text(
-                                                  "Waiting Time: ${tripList[index].value["waiting"]}"),
+                                              title:
+                                              Text("Time: ${tripList[index].value["time"]}"),
+                                              subtitle:
+                                              Text("Date: ${tripList[index].value["date"]}"),
                                             ),
                                           ],
                                         ),
@@ -72,18 +73,16 @@ class _Route2State extends State<Route2> {
                                         color: Colors.white,
                                         child: Column(children: [
                                           ListTile(
-                                            leading: Icon(Icons.person),
-                                            title: Text(
-                                                "Name: ${tripList[index].value["name"]}"),
-                                            subtitle: Text(
-                                                "Phone: ${tripList[index].value["phone"]}"),
-                                          ),
-                                          ListTile(
                                             leading: Icon(Icons.car_rental),
-                                            title: Text(
-                                                "Car: ${tripList[index].value["car"]}"),
+                                            title: Text("Car: ${tripList[index].value["car"]}"),
                                             subtitle: Text(
                                                 "Capacity: ${tripList[index].value["capacity"]}"),
+                                          ),
+                                          ListTile(
+                                            leading: Icon(Icons.person),
+                                            title: Text("Name: ${tripList[index].value["name"]}"),
+                                            subtitle:
+                                            Text("Phone: ${tripList[index].value["phone"]}"),
                                           ),
                                         ]),
                                       ),
@@ -93,12 +92,34 @@ class _Route2State extends State<Route2> {
                                           children: [
                                             ListTile(
                                               leading: Icon(Icons.attach_money),
-                                              title: Text(
-                                                  "Fees: ${tripList[index].value["fee"]}"),
+                                              title:
+                                              Text("Fees: ${tripList[index].value["fee"]}"),
                                             ),
                                           ],
                                         ),
                                       ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all<Color>(
+                                                Colors.redAccent),
+                                          ),
+                                          onPressed: () {
+                                            DatabaseReference tripToDeleteReference =
+                                            FirebaseDatabase.instance
+                                                .ref()
+                                                .child('FromCollege')
+                                                .child(tripList[index].key!);
+                                            tripToDeleteReference.remove().then((_) {
+                                              print("Trip deleted successfully");
+                                            }).catchError((error) {
+                                              print("Failed to delete trip: $error");
+                                            });
+                                          },
+                                          child: textButtons("Delete"),
+                                        ),
+                                      )
                                     ]),
                                   ),
                                 ),
