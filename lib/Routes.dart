@@ -13,6 +13,7 @@ import 'about.dart';
 
 String username = "";
 String phone = "";
+String userID = "";
 
 class Routes extends StatefulWidget {
   const Routes({Key? key}) : super(key: key);
@@ -45,6 +46,7 @@ class _RoutesState extends State<Routes> {
       setState(() {
         _user = user;
         _userData = userData.data();
+        userID = user.uid;
         username = _userData!['firstName'] + " " + _userData!['lastName'];
         phone = _userData!['phone'];
       });

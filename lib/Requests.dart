@@ -1,92 +1,89 @@
+import 'package:asu_carpool/ReqAccepted.dart';
+import 'package:asu_carpool/ReqDeclined.dart';
 import 'package:flutter/material.dart';
-
 import 'MyWidgets.dart';
-
-List<Widget> myRequests = [];
-List<String> myPayments = [];
+import 'ReqPending.dart';
 
 class Requests extends StatefulWidget {
-  final Widget? card;
-  final String? paymentMethod;
-
-  const Requests({Key? key, this.card, this.paymentMethod}) : super(key: key);
+  const Requests({Key? key}) : super(key: key);
 
   @override
   State<Requests> createState() => _RequestsState();
 }
 
 class _RequestsState extends State<Requests> {
-  @override
-  void initState() {
-    super.initState();
-    if (widget.card != null) {
-      if (!myRequests.contains(widget.card)) {
-        myRequests.add(widget.card!);
-        myPayments.add(widget.paymentMethod!);
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colorsPrimary,
-        leading: iconBack(context),
-        title: textPageTitle("Your Requests"),
-        centerTitle: true,
-      ),
-      body: Container(
-        color: Colors.white,
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: Center(
-            child: ListView.builder(
-              itemCount: myRequests.length,
-              itemBuilder: (context, index) {
-                String paymentMethod =
-                    widget.paymentMethod ?? 'Payment Method Not Provided';
-                return Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Card(
-                    color: Colors.white70,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          myRequests[index],
-                          Padding(
-                              padding: const EdgeInsets.all(5),
-                              child:
-                                  Text("Payment Method: ${myPayments[index]}")),
-                          const Padding(
-                              padding: EdgeInsets.all(5),
-                              child: Text("Status: Pending/Accepted/Rejected")),
-                          Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Colors.red),
-                              ),
-                              child: textButtons("Cancel"),
-                              onPressed: () {
-                                myRequests.remove(myRequests[index]);
-                                setState(() {});
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+    return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: colorsPrimary,
+            title: textPageTitle("Available Routes"),
+            centerTitle: true,
+            bottom: const TabBar(
+              indicatorColor: Colors.white,
+              tabs: [
+                Tab(
+                  icon: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                          Icons.pending,
+                          color: Colors.white),
+                      Text(
+                        'Pending',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
                   ),
-                );
-              },
+                ),
+                Tab(
+                  icon: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                          Icons.check,
+                          color: Colors.white),
+                      Text(
+                        'Accepted',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Tab(
+                  icon: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                      Icons.dangerous_rounded,
+                      color: Colors.white),
+                      Text(
+                        'Declined',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-        ),
-      ),
-    );
+          body: const TabBarView(
+            children: [
+              ReqPending(),
+              ReqAccepted(),
+              ReqDeclined()
+            ],
+          ),
+        ));
   }
 }
