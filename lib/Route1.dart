@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'MyWidgets.dart';
 import 'RoutesDesc.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'Routes.dart';
 
 class Route1 extends StatefulWidget {
   const Route1({Key? key}) : super(key: key);
@@ -27,12 +28,16 @@ class _Route1State extends State<Route1> {
               if (snapshot.hasData &&
                   !snapshot.hasError &&
                   snapshot.data!.snapshot.value != null) {
+
                 Map<dynamic, dynamic>? trips =
                     snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
                 List<MapEntry> tripList = trips?.entries.toList() ?? [];
+                print("tripList: $tripList");
+                print("Snapshot: ${snapshot.data}");
+
 
                 return ListView.builder(
-                  itemCount: trips?.length ?? 0,
+                  itemCount: tripList.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.all(10),
@@ -51,9 +56,9 @@ class _Route1State extends State<Route1> {
                             tileColor: Colors.transparent,
                             leading: const Icon(Icons.pin_drop_sharp, color: Colors.white,),
                             title: textPageTitle(
-                                "Route: ${tripList[index].value["route"]}"),
+                                "${tripList[index].value["route"]} - ${tripList[index].value["gate"]} "),
                             subtitle: textPageTitle(
-                                "Driver: ${tripList[index].value["name"]}"),
+                                "${tripList[index].value["date"]} / ${tripList[index].value["time"]}"),
                           ),
                         ),
                       ),
@@ -61,6 +66,7 @@ class _Route1State extends State<Route1> {
                   },
                 );
               } else {
+                print("Errooooooooooor: ${snapshot.error}");
                 return Center(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

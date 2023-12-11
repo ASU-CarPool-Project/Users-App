@@ -33,7 +33,7 @@ class _Route2State extends State<Route2> {
                 List<MapEntry> tripList = trips?.entries.toList() ?? [];
 
                 return ListView.builder(
-                  itemCount: trips?.length ?? 0,
+                  itemCount: tripList.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.all(10),
@@ -52,9 +52,9 @@ class _Route2State extends State<Route2> {
                             tileColor: Colors.transparent,
                             leading: const Icon(Icons.pin_drop_sharp, color: Colors.white,),
                             title: textPageTitle(
-                                "Route: ${tripList[index].value["route"]}"),
+                                "${tripList[index].value["gate"]} - ${tripList[index].value["route"]} "),
                             subtitle: textPageTitle(
-                                "Driver: ${tripList[index].value["name"]}"),
+                                "${tripList[index].value["date"]} / ${tripList[index].value["time"]}"),
                           ),
                         ),
                       ),
