@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 Color? colorsPrimary = Colors.indigo;
 Color? colorsRoute1 = Colors.indigoAccent;
 Color? colorsRoute2 = Colors.cyan;
-
 
 Widget textButtons(String text) {
   return Text(
@@ -32,7 +32,7 @@ Widget textLargeTitle(String text) {
   );
 }
 
-Widget iconBack(BuildContext context){
+Widget iconBack(BuildContext context) {
   return IconButton(
     icon: const Icon(
       IconData(
@@ -45,5 +45,17 @@ Widget iconBack(BuildContext context){
     onPressed: () {
       Navigator.of(context).pop();
     },
+  );
+}
+
+Future<bool?> toastMsg(String message) {
+  return Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    backgroundColor: Colors.green,
+    textColor: Colors.white,
+    fontSize: 16.0,
   );
 }

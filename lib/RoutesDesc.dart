@@ -151,8 +151,9 @@ class _RoutesDescState extends State<RoutesDesc> {
                         .push()
                         .set({
                       "userID": userID,
-                      "username": username,
+                      "client": username,
                       "driverID": widget.tripData["driverID"],
+                      "driver": widget.tripData["driver"],
                       "direction": widget.tripData["direction"],
                       "route": widget.tripData["route"],
                       "name": widget.tripData["name"],
@@ -163,11 +164,12 @@ class _RoutesDescState extends State<RoutesDesc> {
                       "date": widget.tripData["date"],
                       "gate": widget.tripData["gate"],
                       "fee": widget.tripData["fee"],
-                      "payment": _selectedPaymentMethod.toString().trim(),
+                      "payment":
+                          _selectedPaymentMethod.toString().split('.').last,
                       "reqStatus": "Pending",
                     });
 
-                    print("added successfully");
+                    print("Request Added Successfully");
                   }),
             ),
           ],

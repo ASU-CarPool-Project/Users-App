@@ -13,7 +13,7 @@ class ReqPending extends StatefulWidget {
 
 class _ReqPendingState extends State<ReqPending> {
   DatabaseReference tripsReference =
-  FirebaseDatabase.instance.ref().child("Requests").child("Pending");
+      FirebaseDatabase.instance.ref().child("Requests").child("Pending");
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +23,14 @@ class _ReqPendingState extends State<ReqPending> {
         padding: EdgeInsets.all(20),
         child: Center(
           child: StreamBuilder(
-            stream: tripsReference.orderByChild("userID").equalTo('$userID').onValue,
+            stream:
+                tripsReference.orderByChild("userID").equalTo(userID).onValue,
             builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
               if (snapshot.hasData &&
                   !snapshot.hasError &&
                   snapshot.data!.snapshot.value != null) {
                 Map<dynamic, dynamic>? trips =
-                snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
+                    snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
                 List<MapEntry> tripList = trips?.entries.toList() ?? [];
 
                 return ListView.builder(
@@ -55,10 +56,10 @@ class _ReqPendingState extends State<ReqPending> {
                                   ),
                                   ListTile(
                                     leading: Icon(Icons.access_time),
-                                    title:
-                                    Text("Time: ${tripList[index].value["time"]}"),
-                                    subtitle:
-                                    Text("Date: ${tripList[index].value["date"]}"),
+                                    title: Text(
+                                        "Time: ${tripList[index].value["time"]}"),
+                                    subtitle: Text(
+                                        "Date: ${tripList[index].value["date"]}"),
                                   ),
                                 ],
                               ),
@@ -68,15 +69,17 @@ class _ReqPendingState extends State<ReqPending> {
                               child: Column(children: [
                                 ListTile(
                                   leading: Icon(Icons.car_rental),
-                                  title: Text("Car: ${tripList[index].value["car"]}"),
+                                  title: Text(
+                                      "Car: ${tripList[index].value["car"]}"),
                                   subtitle: Text(
                                       "Capacity: ${tripList[index].value["capacity"]}"),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.person),
-                                  title: Text("Name: ${tripList[index].value["name"]}"),
-                                  subtitle:
-                                  Text("Phone: ${tripList[index].value["phone"]}"),
+                                  title: Text(
+                                      "Name: ${tripList[index].value["name"]}"),
+                                  subtitle: Text(
+                                      "Phone: ${tripList[index].value["phone"]}"),
                                 ),
                               ]),
                             ),
@@ -86,12 +89,15 @@ class _ReqPendingState extends State<ReqPending> {
                                 children: [
                                   ListTile(
                                     leading: const Icon(Icons.attach_money),
-                                    title: Text("Fees: ${tripList[index].value["fee"]}"),
-                                    subtitle: Text("Payment Method: ${tripList[index].value["payment"]}"),
+                                    title: Text(
+                                        "Fees: ${tripList[index].value["fee"]}"),
+                                    subtitle: Text(
+                                        "Payment Method: ${tripList[index].value["payment"]}"),
                                   ),
                                   ListTile(
                                     leading: const Icon(Icons.pending),
-                                    title: Text("Request Status: ${tripList[index].value["reqStatus"]}"),
+                                    title: Text(
+                                        "Request Status: ${tripList[index].value["reqStatus"]}"),
                                   ),
                                 ],
                               ),
@@ -100,15 +106,16 @@ class _ReqPendingState extends State<ReqPending> {
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(
-                                      Colors.redAccent),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.redAccent),
                                 ),
                                 onPressed: () {
                                   DatabaseReference tripToDeleteReference =
-                                  FirebaseDatabase.instance
-                                      .ref()
-                                      .child('Requests')
-                                      .child(tripList[index].key!);
+                                      FirebaseDatabase.instance
+                                          .ref()
+                                          .child('Requests')
+                                          .child(tripList[index].key!);
                                   tripToDeleteReference.remove().then((_) {
                                     print("Request Canceled successfully");
                                   }).catchError((error) {

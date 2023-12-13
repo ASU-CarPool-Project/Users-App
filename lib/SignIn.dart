@@ -1,4 +1,4 @@
-import 'package:asu_carpool/Routes.dart';
+import 'package:asu_carpool/home.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,35 +30,15 @@ class _SignInState extends State<SignIn> {
       // If sign-in is successful, navigate to the next screen (Routes)
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Routes()),
+        MaterialPageRoute(builder: (context) => home()),
       );
 
       // Reset the form after successful sign-in
       formKey.currentState!.reset();
-
-      // Show a success toast message
-      Fluttertoast.showToast(
-        msg: "Sign In Successful!",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      toastMsg("Sign In Successful!");
     } on FirebaseAuthException catch (e) {
       print("Failed to sign in: $e");
-
-      // Show an error toast message
-      Fluttertoast.showToast(
-        msg: "Failed to Sign In: ${e.message}",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+      toastMsg("Failed to Sign In: ${e.message}");
     }
   }
 
@@ -266,7 +246,7 @@ class _SignInState extends State<SignIn> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Routes()),
+                      MaterialPageRoute(builder: (context) => home()),
                     );
                   },
                   child: const Text(

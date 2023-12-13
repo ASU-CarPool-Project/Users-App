@@ -20,7 +20,8 @@ class _RequestsState extends State<Requests> {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: colorsPrimary,
-            title: textPageTitle("My Routes"),
+            leading: iconBack(context),
+            title: textPageTitle("Requests History"),
             centerTitle: true,
             bottom: const TabBar(
               indicatorColor: Colors.white,
