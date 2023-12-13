@@ -12,7 +12,6 @@ class Requests extends StatefulWidget {
 }
 
 class _RequestsState extends State<Requests> {
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -21,7 +20,7 @@ class _RequestsState extends State<Requests> {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: colorsPrimary,
-            title: textPageTitle("Available Routes"),
+            title: textPageTitle("My Routes"),
             centerTitle: true,
             bottom: const TabBar(
               indicatorColor: Colors.white,
@@ -30,9 +29,7 @@ class _RequestsState extends State<Requests> {
                   icon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                          Icons.pending,
-                          color: Colors.white),
+                      Icon(Icons.pending, color: Colors.white),
                       Text(
                         'Pending',
                         style: TextStyle(
@@ -46,9 +43,7 @@ class _RequestsState extends State<Requests> {
                   icon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                          Icons.check,
-                          color: Colors.white),
+                      Icon(Icons.check, color: Colors.white),
                       Text(
                         'Accepted',
                         style: TextStyle(
@@ -62,9 +57,7 @@ class _RequestsState extends State<Requests> {
                   icon: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                      Icons.dangerous_rounded,
-                      color: Colors.white),
+                      Icon(Icons.dangerous_rounded, color: Colors.white),
                       Text(
                         'Declined',
                         style: TextStyle(
@@ -78,11 +71,7 @@ class _RequestsState extends State<Requests> {
             ),
           ),
           body: const TabBarView(
-            children: [
-              ReqPending(),
-              ReqAccepted(),
-              ReqDeclined()
-            ],
+            children: [ReqPending(), ReqAccepted(), ReqDeclined()],
           ),
         ));
   }

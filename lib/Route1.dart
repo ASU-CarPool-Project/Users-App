@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'MyWidgets.dart';
 import 'RoutesDesc.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'Routes.dart';
 
 class Route1 extends StatefulWidget {
   const Route1({Key? key}) : super(key: key);
@@ -28,13 +27,9 @@ class _Route1State extends State<Route1> {
               if (snapshot.hasData &&
                   !snapshot.hasError &&
                   snapshot.data!.snapshot.value != null) {
-
                 Map<dynamic, dynamic>? trips =
                     snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
                 List<MapEntry> tripList = trips?.entries.toList() ?? [];
-                print("tripList: $tripList");
-                print("Snapshot: ${snapshot.data}");
-
 
                 return ListView.builder(
                   itemCount: tripList.length,
@@ -46,15 +41,19 @@ class _Route1State extends State<Route1> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => RoutesDesc(tripData: tripList[index].value),
-                              ),
+                              builder: (context) =>
+                                  RoutesDesc(tripData: tripList[index].value),
+                            ),
                           );
                         },
                         child: Card(
                           color: colorsRoute1,
                           child: ListTile(
                             tileColor: Colors.transparent,
-                            leading: const Icon(Icons.pin_drop_sharp, color: Colors.white,),
+                            leading: const Icon(
+                              Icons.pin_drop_sharp,
+                              color: Colors.white,
+                            ),
                             title: textPageTitle(
                                 "${tripList[index].value["route"]} - ${tripList[index].value["gate"]} "),
                             subtitle: textPageTitle(

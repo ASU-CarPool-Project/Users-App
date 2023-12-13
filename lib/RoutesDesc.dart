@@ -2,7 +2,6 @@ import 'package:asu_carpool/Requests.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:asu_carpool/MyWidgets.dart';
-
 import 'Routes.dart';
 
 class RoutesDesc extends StatefulWidget {
@@ -53,10 +52,10 @@ class _RoutesDescState extends State<RoutesDesc> {
                                   ),
                                   ListTile(
                                     leading: Icon(Icons.access_time),
-                                    title:
-                                        Text("Time: ${widget.tripData["time"]}"),
-                                    subtitle:
-                                        Text("Date: ${widget.tripData["date"]}"),
+                                    title: Text(
+                                        "Time: ${widget.tripData["time"]}"),
+                                    subtitle: Text(
+                                        "Date: ${widget.tripData["date"]}"),
                                   ),
                                 ],
                               ),
@@ -72,9 +71,10 @@ class _RoutesDescState extends State<RoutesDesc> {
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.person),
-                                  title: Text("Name: ${widget.tripData["name"]}"),
-                                  subtitle:
-                                      Text("Phone: ${widget.tripData["phone"]}"),
+                                  title:
+                                      Text("Name: ${widget.tripData["name"]}"),
+                                  subtitle: Text(
+                                      "Phone: ${widget.tripData["phone"]}"),
                                 ),
                               ]),
                             ),
@@ -151,7 +151,8 @@ class _RoutesDescState extends State<RoutesDesc> {
                         .push()
                         .set({
                       "userID": userID,
-                      "driverID": widget.tripData["userID"],
+                      "username": username,
+                      "driverID": widget.tripData["driverID"],
                       "direction": widget.tripData["direction"],
                       "route": widget.tripData["route"],
                       "name": widget.tripData["name"],

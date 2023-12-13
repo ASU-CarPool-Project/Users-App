@@ -1,9 +1,8 @@
-import 'package:asu_carpool/Requests.dart';
-import 'package:asu_carpool/Route1.dart';
-import 'package:asu_carpool/settings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:asu_carpool/Requests.dart';
+import 'package:asu_carpool/Route1.dart';
 import 'package:asu_carpool/Route2.dart';
 import 'MyWidgets.dart';
 import 'SignIn.dart';
@@ -47,6 +46,7 @@ class _RoutesState extends State<Routes> {
         _user = user;
         _userData = userData.data();
         userID = user.uid;
+        print(userID);
         username = _userData!['firstName'] + " " + _userData!['lastName'];
         phone = _userData!['phone'];
       });
@@ -65,7 +65,7 @@ class _RoutesState extends State<Routes> {
             backgroundColor: colorsPrimary,
             title: textPageTitle("Available Routes"),
             centerTitle: true,
-            bottom: TabBar(
+            bottom: const TabBar(
               indicatorColor: Colors.white,
               tabs: [
                 Tab(
@@ -154,7 +154,7 @@ class _RoutesState extends State<Routes> {
                     // tileColor: Theme.of(context).colorScheme.secondary,
                     leading: Icon(Icons.list_alt_rounded, color: colorsPrimary),
                     title: Text(
-                      "Your Requests",
+                      "My Requests",
                       style: TextStyle(color: colorsPrimary),
                     ),
                     onTap: () {
