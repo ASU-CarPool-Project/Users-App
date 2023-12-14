@@ -32,6 +32,36 @@ Widget textLargeTitle(String text) {
   );
 }
 
+Widget textStatusPending(String text) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Text(
+      text,
+      style: const TextStyle(fontSize: 18, color: Colors.orange),
+    ),
+  );
+}
+
+Widget textStatusAccepted(String text) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Text(
+      text,
+      style: const TextStyle(fontSize: 18, color: Colors.green),
+    ),
+  );
+}
+
+Widget textStatusDeclined(String text) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Text(
+      text,
+      style: const TextStyle(fontSize: 18, color: Colors.red),
+    ),
+  );
+}
+
 Widget iconBack(BuildContext context) {
   return IconButton(
     icon: const Icon(

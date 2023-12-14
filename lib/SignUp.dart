@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'MyWidgets.dart';
-import 'Routes.dart';
+import 'home.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -21,12 +21,12 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController _controllerPhone = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
   final TextEditingController _controllerConfirmPassword =
-  TextEditingController();
+      TextEditingController();
   bool _isObscure = true;
 
   double boxHeight = 30.0;
   static final RegExp _emailRegExp =
-  RegExp(r"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$");
+      RegExp(r"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$");
 
   /////////////////////////////////////////////////////////////////////////////
 
@@ -34,15 +34,15 @@ class _SignUpState extends State<SignUp> {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-          email: _controllerEmail.text.trim(),
-          password: _controllerPassword.text);
+              email: _controllerEmail.text.trim(),
+              password: _controllerPassword.text);
 
       // Send verification email
-      await userCredential.user!.sendEmailVerification();
+      // await userCredential.user!.sendEmailVerification();
 
       // Store additional user data in Firestore
       await FirebaseFirestore.instance
-          .collection('users_driver')
+          .collection('users')
           .doc(userCredential.user!.uid)
           .set({
         'firstName': _controllerFirstName.text,
@@ -54,7 +54,7 @@ class _SignUpState extends State<SignUp> {
       print("Verification email sent to ${userCredential.user!.email}");
       Fluttertoast.showToast(
         msg:
-        "Verification email sent to ${userCredential.user!.email}. Please check your email and verify your account.",
+            "Verification email sent to ${userCredential.user!.email}. Please check your email and verify your account.",
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 4,
@@ -68,7 +68,7 @@ class _SignUpState extends State<SignUp> {
       // If sign-up is successful, navigate to home
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Routes()),
+        MaterialPageRoute(builder: (context) => home()),
       );
     } on FirebaseAuthException catch (e) {
       print("Failed to sign up: $e");
@@ -84,7 +84,6 @@ class _SignUpState extends State<SignUp> {
       );
     }
   }
-
 
   /////////////////////////////////////////////////////////////////////////////
 
@@ -269,7 +268,7 @@ class _SignUpState extends State<SignUp> {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                    MaterialStateProperty.all<Color>(colorsPrimary!),
+                        MaterialStateProperty.all<Color>(colorsPrimary!),
                   ),
                   onPressed: _register,
                   child: textButtons("Sign Up"),

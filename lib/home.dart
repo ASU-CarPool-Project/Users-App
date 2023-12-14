@@ -26,7 +26,7 @@ class _homeState extends State<home> {
   Map<String, dynamic>? _userData;
 
   DatabaseReference tripsReference =
-      FirebaseDatabase.instance.ref().child("Requests").child("Accepted");
+      FirebaseDatabase.instance.ref().child("Requests").child("Pending");
 
   @override
   void initState() {
@@ -175,6 +175,13 @@ class _homeState extends State<home> {
                                 .data!.snapshot.value as Map<dynamic, dynamic>?;
                             List<MapEntry> tripList =
                                 trips?.entries.toList() ?? [];
+                            String status = "Accepted";
+                            List<MapEntry> filteredList = tripList
+                                .where((entry) => entry.value["reqStatus"]
+                                    .toString()
+                                    .toLowerCase()
+                                    .contains(status.toLowerCase()))
+                                .toList();
 
                             return ListView.builder(
                               itemCount: tripList.length,

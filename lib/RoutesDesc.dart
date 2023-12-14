@@ -71,8 +71,8 @@ class _RoutesDescState extends State<RoutesDesc> {
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.person),
-                                  title:
-                                      Text("Name: ${widget.tripData["name"]}"),
+                                  title: Text(
+                                      "Driver: ${widget.tripData["driver"]}"),
                                   subtitle: Text(
                                       "Phone: ${widget.tripData["phone"]}"),
                                 ),

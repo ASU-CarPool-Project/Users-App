@@ -13,7 +13,7 @@ class ReqDeclined extends StatefulWidget {
 
 class _ReqDeclinedState extends State<ReqDeclined> {
   DatabaseReference tripsReference =
-  FirebaseDatabase.instance.ref().child("Requests").child("Declined");
+      FirebaseDatabase.instance.ref().child("Requests").child("Pending");
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +23,27 @@ class _ReqDeclinedState extends State<ReqDeclined> {
         padding: EdgeInsets.all(20),
         child: Center(
           child: StreamBuilder(
-            stream: tripsReference.orderByChild("userID").equalTo('$userID').onValue,
+            stream: tripsReference
+                .orderByChild("userID")
+                .equalTo('$userID')
+                .onValue,
             builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
               if (snapshot.hasData &&
                   !snapshot.hasError &&
                   snapshot.data!.snapshot.value != null) {
                 Map<dynamic, dynamic>? trips =
-                snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
+                    snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
                 List<MapEntry> tripList = trips?.entries.toList() ?? [];
+                String status = "Declined";
+                List<MapEntry> filteredList = tripList
+                    .where((entry) => entry.value["reqStatus"]
+                        .toString()
+                        .toLowerCase()
+                        .contains(status.toLowerCase()))
+                    .toList();
 
                 return ListView.builder(
-                  itemCount: tripList.length,
+                  itemCount: filteredList.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.all(10),
@@ -55,10 +65,10 @@ class _ReqDeclinedState extends State<ReqDeclined> {
                                   ),
                                   ListTile(
                                     leading: Icon(Icons.access_time),
-                                    title:
-                                    Text("Time: ${tripList[index].value["time"]}"),
-                                    subtitle:
-                                    Text("Date: ${tripList[index].value["date"]}"),
+                                    title: Text(
+                                        "Time: ${tripList[index].value["time"]}"),
+                                    subtitle: Text(
+                                        "Date: ${tripList[index].value["date"]}"),
                                   ),
                                 ],
                               ),
@@ -68,15 +78,17 @@ class _ReqDeclinedState extends State<ReqDeclined> {
                               child: Column(children: [
                                 ListTile(
                                   leading: Icon(Icons.car_rental),
-                                  title: Text("Car: ${tripList[index].value["car"]}"),
+                                  title: Text(
+                                      "Car: ${tripList[index].value["car"]}"),
                                   subtitle: Text(
                                       "Capacity: ${tripList[index].value["capacity"]}"),
                                 ),
                                 ListTile(
                                   leading: Icon(Icons.person),
-                                  title: Text("Name: ${tripList[index].value["name"]}"),
-                                  subtitle:
-                                  Text("Phone: ${tripList[index].value["phone"]}"),
+                                  title: Text(
+                                      "Name: ${tripList[index].value["name"]}"),
+                                  subtitle: Text(
+                                      "Phone: ${tripList[index].value["phone"]}"),
                                 ),
                               ]),
                             ),
@@ -86,12 +98,16 @@ class _ReqDeclinedState extends State<ReqDeclined> {
                                 children: [
                                   ListTile(
                                     leading: const Icon(Icons.attach_money),
-                                    title: Text("Fees: ${tripList[index].value["fee"]}"),
-                                    subtitle: Text("Payment Method: ${tripList[index].value["payment"]}"),
+                                    title: Text(
+                                        "Fees: ${tripList[index].value["fee"]}"),
+                                    subtitle: Text(
+                                        "Payment Method: ${tripList[index].value["payment"]}"),
                                   ),
                                   ListTile(
-                                    leading: const Icon(Icons.dangerous_rounded),
-                                    title: Text("Request Status: ${tripList[index].value["reqStatus"]}"),
+                                    leading: const Icon(Icons.dangerous_rounded,
+                                        color: Colors.red),
+                                    title: textStatusDeclined(
+                                        "Request Status: ${tripList[index].value["reqStatus"]}"),
                                   ),
                                 ],
                               ),
@@ -100,15 +116,17 @@ class _ReqDeclinedState extends State<ReqDeclined> {
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(
-                                      Colors.redAccent),
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.redAccent),
                                 ),
                                 onPressed: () {
                                   DatabaseReference tripToDeleteReference =
-                                  FirebaseDatabase.instance
-                                      .ref()
-                                      .child('Requests')
-                                      .child(tripList[index].key!);
+                                      FirebaseDatabase.instance
+                                          .ref()
+                                          .child('Requests')
+                                          .child("Pending")
+                                          .child(tripList[index].key!);
                                   tripToDeleteReference.remove().then((_) {
                                     print("Request Canceled successfully");
                                   }).catchError((error) {
@@ -129,7 +147,7 @@ class _ReqDeclinedState extends State<ReqDeclined> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        textLargeTitle("Searching for Declined trips..."),
+                        textStatusDeclined("No Declined Trips Found"),
                         const CircularProgressIndicator()
                       ]),
                 );
