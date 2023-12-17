@@ -54,14 +54,14 @@ class _ReqAcceptedState extends State<ReqAccepted> {
                               child: Column(
                                 children: [
                                   ListTile(
-                                    leading: Icon(Icons.directions),
+                                    leading: const Icon(Icons.directions),
                                     title: Text(
                                         "${tripList[index].value["direction"]} - ${tripList[index].value["gate"]}"),
                                     subtitle: Text(
                                         "Route: ${tripList[index].value["route"]}"),
                                   ),
                                   ListTile(
-                                    leading: Icon(Icons.access_time),
+                                    leading: const Icon(Icons.access_time),
                                     title: Text(
                                         "Time: ${tripList[index].value["time"]}"),
                                     subtitle: Text(

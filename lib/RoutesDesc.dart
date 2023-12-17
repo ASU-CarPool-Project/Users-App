@@ -138,11 +138,40 @@ class _RoutesDescState extends State<RoutesDesc> {
             Padding(
               padding: const EdgeInsets.all(20),
               child: ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.green)),
-                  child: textButtons("Request"),
-                  onPressed: () async {
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green)),
+                child: textButtons("Request"),
+                onPressed: () async {
+                  // Get the current date and time
+                  DateTime currentDate = DateTime.now();
+
+                  // Calculate the reservation deadline based on the trip time
+                  DateTime reservationDeadline;
+                  if (widget.tripData["time"] == "7:30 AM") {
+                    reservationDeadline = DateTime(
+                      currentDate.year,
+                      currentDate.month,
+                      currentDate.day - 1,
+                      22, // 10:00 PM
+                      0,
+                    );
+                  } else if (widget.tripData["time"] == "5:30 PM") {
+                    reservationDeadline = DateTime(
+                      currentDate.year,
+                      currentDate.month,
+                      currentDate.day,
+                      13, // 1:00 PM
+                      0,
+                    );
+                  } else {
+                    // Handle other trip times if needed
+                    reservationDeadline = DateTime.now();
+                  }
+
+                  // Check if the current date and time are within the reservation deadline
+                  if (currentDate.isBefore(reservationDeadline)) {
+                    // Reservation deadline not reached, proceed with the reservation
                     DatabaseReference databaseReference =
                         FirebaseDatabase.instance.ref();
                     await databaseReference.child('Requests').push().set({
@@ -166,7 +195,28 @@ class _RoutesDescState extends State<RoutesDesc> {
                     });
 
                     print("Request Added Successfully");
-                  }),
+                  } else {
+                    // Reservation deadline reached, notify the user
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Reservation Deadline Exceeded"),
+                          content: Text("The reservation deadline has passed."),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
             ),
           ],
         ));
