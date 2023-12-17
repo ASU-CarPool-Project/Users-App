@@ -145,11 +145,7 @@ class _RoutesDescState extends State<RoutesDesc> {
                   onPressed: () async {
                     DatabaseReference databaseReference =
                         FirebaseDatabase.instance.ref();
-                    await databaseReference
-                        .child('Requests')
-                        .child('Pending')
-                        .push()
-                        .set({
+                    await databaseReference.child('Requests').push().set({
                       "userID": userID,
                       "client": username,
                       "driverID": widget.tripData["driverID"],

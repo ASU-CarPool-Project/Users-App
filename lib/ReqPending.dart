@@ -12,7 +12,7 @@ class ReqPending extends StatefulWidget {
 
 class _ReqPendingState extends State<ReqPending> {
   DatabaseReference tripsReference =
-      FirebaseDatabase.instance.ref().child("Requests").child("Pending");
+      FirebaseDatabase.instance.ref().child("Requests");
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,9 @@ class _ReqPendingState extends State<ReqPending> {
                   snapshot.data!.snapshot.value != null) {
                 Map<dynamic, dynamic>? trips =
                     snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
-                List<MapEntry> tripList = trips?.entries.toList() ?? [];
+                List<MapEntry> allList = trips?.entries.toList() ?? [];
                 String status = "Pending";
-                List<MapEntry> filteredList = tripList
+                List<MapEntry> tripList = allList
                     .where((entry) => entry.value["reqStatus"]
                         .toString()
                         .toLowerCase()
@@ -40,7 +40,7 @@ class _ReqPendingState extends State<ReqPending> {
                     .toList();
 
                 return ListView.builder(
-                  itemCount: filteredList.length,
+                  itemCount: tripList.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(10),

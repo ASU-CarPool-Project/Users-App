@@ -13,7 +13,7 @@ class ReqAccepted extends StatefulWidget {
 
 class _ReqAcceptedState extends State<ReqAccepted> {
   DatabaseReference tripsReference =
-      FirebaseDatabase.instance.ref().child("Requests").child("Pending");
+      FirebaseDatabase.instance.ref().child("Requests");
 
   @override
   Widget build(BuildContext context) {
@@ -23,19 +23,16 @@ class _ReqAcceptedState extends State<ReqAccepted> {
         padding: EdgeInsets.all(20),
         child: Center(
           child: StreamBuilder(
-            stream: tripsReference
-                .orderByChild("userID")
-                .equalTo('$userID')
-                .onValue,
+            stream: tripsReference.onValue,
             builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
               if (snapshot.hasData &&
                   !snapshot.hasError &&
                   snapshot.data!.snapshot.value != null) {
                 Map<dynamic, dynamic>? trips =
                     snapshot.data!.snapshot.value as Map<dynamic, dynamic>?;
-                List<MapEntry> tripList = trips?.entries.toList() ?? [];
+                List<MapEntry> allList = trips?.entries.toList() ?? [];
                 String status = "Accepted";
-                List<MapEntry> filteredList = tripList
+                List<MapEntry> tripList = allList
                     .where((entry) => entry.value["reqStatus"]
                         .toString()
                         .toLowerCase()
@@ -43,7 +40,7 @@ class _ReqAcceptedState extends State<ReqAccepted> {
                     .toList();
 
                 return ListView.builder(
-                  itemCount: filteredList.length,
+                  itemCount: tripList.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.all(10),

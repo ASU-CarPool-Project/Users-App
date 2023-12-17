@@ -22,7 +22,10 @@ class _Route2State extends State<Route2> {
         padding: const EdgeInsets.all(20),
         child: Center(
           child: StreamBuilder(
-            stream: tripsReference.onValue,
+            stream: tripsReference
+                .orderByChild("direction")
+                .equalTo("FromCollege")
+                .onValue,
             builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
               if (snapshot.hasData &&
                   !snapshot.hasError &&

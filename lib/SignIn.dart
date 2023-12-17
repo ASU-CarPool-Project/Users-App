@@ -119,7 +119,7 @@ class _SignInState extends State<SignIn> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorsPrimary,
-        title: textPageTitle("ASU CAR POOL - Driver"),
+        title: textPageTitle("ASU CAR POOL"),
         centerTitle: true,
       ),
       body: Container(

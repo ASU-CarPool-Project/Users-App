@@ -19,10 +19,13 @@ class _Route1State extends State<Route1> {
     return Container(
       color: Colors.white,
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Center(
           child: StreamBuilder(
-            stream: tripsReference.onValue,
+            stream: tripsReference
+                .orderByChild("direction")
+                .equalTo("ToCollege")
+                .onValue,
             builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
               if (snapshot.hasData &&
                   !snapshot.hasError &&

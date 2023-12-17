@@ -1,14 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'SignIn.dart';
-import 'SplashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'SignIn.dart';
 import 'firebase_options.dart';
+import 'home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(MyApp());
 }
 
@@ -16,7 +18,6 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   Future<void> initializeApp() async {
-    // Simulate an asynchronous task (e.g., Firebase initialization)
     await Future.delayed(const Duration(seconds: 2));
   }
 
@@ -24,17 +25,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'My App',
       home: FutureBuilder(
-        future: initializeApp(),
-        builder: (context, snapshot) {
+        future: FirebaseAuth.instance.authStateChanges().first,
+        builder: (context, AsyncSnapshot<User?> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return SplashScreen(); // Display loading screen while waiting
+            return CircularProgressIndicator();
           } else {
-            return SignIn(); // Replace with your main app screen
+            final bool isLoggedIn = snapshot.hasData && snapshot.data != null;
+            return isLoggedIn ? home() : SignIn();
           }
         },
-      ), // Set the initial screen.
+      ),
     );
   }
 }

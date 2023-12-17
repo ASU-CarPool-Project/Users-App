@@ -26,7 +26,7 @@ class _homeState extends State<home> {
   Map<String, dynamic>? _userData;
 
   DatabaseReference tripsReference =
-      FirebaseDatabase.instance.ref().child("Requests").child("Pending");
+      FirebaseDatabase.instance.ref().child("Requests");
 
   @override
   void initState() {
@@ -158,73 +158,72 @@ class _homeState extends State<home> {
         body: Container(
           // color: Colors.blue,
           child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 children: [
                   Container(
                     // color: Colors.yellow,
-                    child: Wrap(children: [
-                      StreamBuilder(
-                        stream: tripsReference.onValue,
-                        builder:
-                            (context, AsyncSnapshot<DatabaseEvent> snapshot) {
-                          if (snapshot.hasData &&
-                              !snapshot.hasError &&
-                              snapshot.data!.snapshot.value != null) {
-                            Map<dynamic, dynamic>? trips = snapshot
-                                .data!.snapshot.value as Map<dynamic, dynamic>?;
-                            List<MapEntry> tripList =
-                                trips?.entries.toList() ?? [];
-                            String status = "Accepted";
-                            List<MapEntry> filteredList = tripList
-                                .where((entry) => entry.value["reqStatus"]
-                                    .toString()
-                                    .toLowerCase()
-                                    .contains(status.toLowerCase()))
-                                .toList();
+                    child: Expanded(
+                        child: StreamBuilder(
+                      stream: tripsReference.onValue,
+                      builder:
+                          (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+                        if (snapshot.hasData &&
+                            !snapshot.hasError &&
+                            snapshot.data!.snapshot.value != null) {
+                          Map<dynamic, dynamic>? trips = snapshot
+                              .data!.snapshot.value as Map<dynamic, dynamic>?;
+                          List<MapEntry> allList =
+                              trips?.entries.toList() ?? [];
+                          String status = "Accepted";
+                          List<MapEntry> tripList = allList
+                              .where((entry) => entry.value["reqStatus"]
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(status.toLowerCase()))
+                              .toList();
 
-                            return ListView.builder(
-                              itemCount: tripList.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: Card(
-                                      color: colorsRoute1,
-                                      child: ListTile(
-                                        tileColor: Colors.transparent,
-                                        leading: const Icon(
-                                          Icons.pin_drop_sharp,
-                                          color: Colors.white,
-                                        ),
-                                        title: textPageTitle(
-                                            "${tripList[index].value["route"]} - ${tripList[index].value["gate"]} "),
-                                        subtitle: textPageTitle(
-                                            "${tripList[index].value["date"]} / ${tripList[index].value["time"]}"),
+                          return ListView.builder(
+                            itemCount: tripList.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.all(10),
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: Card(
+                                    color: colorsRoute1,
+                                    child: ListTile(
+                                      tileColor: Colors.transparent,
+                                      leading: const Icon(
+                                        Icons.pin_drop_sharp,
+                                        color: Colors.white,
                                       ),
+                                      title: textPageTitle(
+                                          "${tripList[index].value["route"]} - ${tripList[index].value["gate"]} "),
+                                      subtitle: textPageTitle(
+                                          "${tripList[index].value["date"]} / ${tripList[index].value["time"]}"),
                                     ),
                                   ),
-                                );
-                              },
-                            );
-                          } else {
-                            print("Errooooooooooor: ${snapshot.error}");
-                            return Card(
-                              color: colorsRoute1,
-                              child: ListTile(
-                                tileColor: Colors.transparent,
-                                leading: const Icon(
-                                  Icons.bus_alert,
-                                  color: Colors.white,
                                 ),
-                                title: textPageTitle("No Accepted Trips yet!"),
+                              );
+                            },
+                          );
+                        } else {
+                          print("Errooooooooooor: ${snapshot.error}");
+                          return Card(
+                            color: colorsRoute1,
+                            child: ListTile(
+                              tileColor: Colors.transparent,
+                              leading: const Icon(
+                                Icons.bus_alert,
+                                color: Colors.white,
                               ),
-                            );
-                          }
-                        },
-                      )
-                    ]),
+                              title: textPageTitle("No Accepted Trips yet!"),
+                            ),
+                          );
+                        }
+                      },
+                    )),
                   ),
                   Center(
                     child: Padding(
