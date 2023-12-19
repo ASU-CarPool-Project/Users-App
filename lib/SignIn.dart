@@ -22,10 +22,9 @@ class _SignInState extends State<SignIn> {
 
   Future<void> _signIn() async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: controllerEmail.text.trim(),
-              password: controllerPassword.text);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: controllerEmail.text.trim(),
+          password: controllerPassword.text);
 
       // If sign-in is successful, navigate to the next screen (Routes)
       Navigator.pushReplacement(

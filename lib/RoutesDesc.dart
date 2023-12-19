@@ -201,7 +201,8 @@ class _RoutesDescState extends State<RoutesDesc> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text("Reservation Deadline Exceeded"),
-                          content: const Text("The reservation deadline has passed."),
+                          content: const Text(
+                              "The reservation deadline has passed."),
                           actions: [
                             TextButton(
                               onPressed: () {
@@ -214,6 +215,41 @@ class _RoutesDescState extends State<RoutesDesc> {
                       },
                     );
                   }
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(0),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green)),
+                child: textButtons("Request as a tester"),
+                onPressed: () async {
+                  // Reservation deadline not reached, proceed with the reservation
+                  DatabaseReference databaseReference =
+                      FirebaseDatabase.instance.ref();
+                  await databaseReference.child('Requests').push().set({
+                    "userID": userID,
+                    "client": username,
+                    "driverID": widget.tripData["driverID"],
+                    "driver": widget.tripData["driver"],
+                    "direction": widget.tripData["direction"],
+                    "route": widget.tripData["route"],
+                    "name": widget.tripData["name"],
+                    "phone": widget.tripData["phone"],
+                    "car": widget.tripData["car"],
+                    "capacity": widget.tripData["capacity"],
+                    "time": widget.tripData["time"],
+                    "date": widget.tripData["date"],
+                    "gate": widget.tripData["gate"],
+                    "fee": widget.tripData["fee"],
+                    "payment":
+                        _selectedPaymentMethod.toString().split('.').last,
+                    "reqStatus": "Pending",
+                  });
+
+                  print("Test Request Added Successfully");
                 },
               ),
             ),
