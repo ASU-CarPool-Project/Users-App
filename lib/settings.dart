@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'MyWidgets.dart';
 
 class settings extends StatefulWidget {
-  settings({Key? key}) : super(key: key);
+  const settings({Key? key}) : super(key: key);
 
   @override
   State<settings> createState() => _settingsState();
@@ -35,7 +35,7 @@ class _settingsState extends State<settings> {
                         height: 150, width: 150),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: InkWell(
                       child: const ListTile(
                         tileColor: Colors.indigo,

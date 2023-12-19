@@ -21,6 +21,7 @@ Future<Map<String, dynamic>?> getUserInfo() async {
         .get();
     return userData.data();
   }
+  return null;
 }
 
 Future<void> signOut() async {

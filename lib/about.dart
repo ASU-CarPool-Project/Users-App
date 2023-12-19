@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'MyWidgets.dart';
 
 class about extends StatefulWidget {
-  about({Key? key}) : super(key: key);
+  const about({Key? key}) : super(key: key);
 
   @override
   State<about> createState() => _aboutState();
@@ -37,13 +37,13 @@ class _aboutState extends State<about> {
                           height: 150, width: 150),
                     ),
                     Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           "Welcome to my Car pool app!",
                           style: TextStyle(fontSize: 20, color: colorsPrimary),
                         )),
                     Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           "This app was built as a final project\nfor my flutter course",
                           style: TextStyle(fontSize: 15, color: colorsPrimary),

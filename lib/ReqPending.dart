@@ -81,7 +81,7 @@ class _ReqPendingState extends State<ReqPending> {
                                       "Capacity: ${tripList[index].value["capacity"]}"),
                                 ),
                                 ListTile(
-                                  leading: Icon(Icons.person),
+                                  leading: const Icon(Icons.person),
                                   title: Text(
                                       "Driver: ${tripList[index].value["driver"]}"),
                                   subtitle: Text(

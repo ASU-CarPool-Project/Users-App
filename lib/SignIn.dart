@@ -30,7 +30,7 @@ class _SignInState extends State<SignIn> {
       // If sign-in is successful, navigate to the next screen (Routes)
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => home()),
+        MaterialPageRoute(builder: (context) => const home()),
       );
 
       // Reset the form after successful sign-in
@@ -49,7 +49,7 @@ class _SignInState extends State<SignIn> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Reset Password"),
+          title: const Text("Reset Password"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -175,9 +175,9 @@ class _SignInState extends State<SignIn> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white70,
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                           hintText: 'Password',
-                          icon: Icon(Icons.lock_outline_rounded),
+                          icon: const Icon(Icons.lock_outline_rounded),
                           suffixIcon: IconButton(
                             icon: Icon(
                               _isObscure
@@ -228,7 +228,7 @@ class _SignInState extends State<SignIn> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignUp()),
+                      MaterialPageRoute(builder: (context) => const SignUp()),
                     );
                   },
                   child: const Text(
@@ -246,7 +246,7 @@ class _SignInState extends State<SignIn> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => home()),
+                      MaterialPageRoute(builder: (context) => const home()),
                     );
                   },
                   child: const Text(

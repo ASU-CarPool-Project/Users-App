@@ -1,4 +1,3 @@
-import 'package:asu_carpool/Requests.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:asu_carpool/MyWidgets.dart';
@@ -44,14 +43,14 @@ class _RoutesDescState extends State<RoutesDesc> {
                               child: Column(
                                 children: [
                                   ListTile(
-                                    leading: Icon(Icons.directions),
+                                    leading: const Icon(Icons.directions),
                                     title: Text(
                                         "${widget.tripData["direction"]} - ${widget.tripData["gate"]}"),
                                     subtitle: Text(
                                         "Route: ${widget.tripData["route"]}"),
                                   ),
                                   ListTile(
-                                    leading: Icon(Icons.access_time),
+                                    leading: const Icon(Icons.access_time),
                                     title: Text(
                                         "Time: ${widget.tripData["time"]}"),
                                     subtitle: Text(
@@ -64,13 +63,13 @@ class _RoutesDescState extends State<RoutesDesc> {
                               color: Colors.white,
                               child: Column(children: [
                                 ListTile(
-                                  leading: Icon(Icons.car_rental),
+                                  leading: const Icon(Icons.car_rental),
                                   title: Text("Car: ${widget.tripData["car"]}"),
                                   subtitle: Text(
                                       "Capacity: ${widget.tripData["capacity"]}"),
                                 ),
                                 ListTile(
-                                  leading: Icon(Icons.person),
+                                  leading: const Icon(Icons.person),
                                   title: Text(
                                       "Driver: ${widget.tripData["driver"]}"),
                                   subtitle: Text(
@@ -83,7 +82,7 @@ class _RoutesDescState extends State<RoutesDesc> {
                               child: Column(
                                 children: [
                                   ListTile(
-                                    leading: Icon(Icons.attach_money),
+                                    leading: const Icon(Icons.attach_money),
                                     title:
                                         Text("Fees: ${widget.tripData["fee"]}"),
                                   ),
@@ -201,14 +200,14 @@ class _RoutesDescState extends State<RoutesDesc> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("Reservation Deadline Exceeded"),
-                          content: Text("The reservation deadline has passed."),
+                          title: const Text("Reservation Deadline Exceeded"),
+                          content: const Text("The reservation deadline has passed."),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text("OK"),
+                              child: const Text("OK"),
                             ),
                           ],
                         );

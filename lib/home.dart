@@ -76,10 +76,10 @@ class _homeState extends State<home> {
                   accountName: _userData != null
                       ? Text(
                           "${_userData!['firstName'] + " " + _userData!['lastName']}")
-                      : Text("Finn The Manager"),
+                      : const Text("Finn The Manager"),
                   accountEmail: _userData != null
                       ? Text("${_userData!['email']}")
-                      : Text("finn@gstore.com"),
+                      : const Text("finn@gstore.com"),
                   // You can provide an email address here if needed
                   currentAccountPicture: CircleAvatar(
                     backgroundColor: Colors.grey.shade300,
@@ -103,11 +103,11 @@ class _homeState extends State<home> {
                   ),
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Profile()),
+                      MaterialPageRoute(builder: (context) => const Profile()),
                     );
                   },
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
                   // tileColor: Theme.of(context).colorScheme.secondary,
                   leading: Icon(Icons.list_alt_rounded, color: colorsPrimary),
@@ -117,11 +117,11 @@ class _homeState extends State<home> {
                   ),
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Requests()),
+                      MaterialPageRoute(builder: (context) => const Requests()),
                     );
                   },
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
                   // tileColor: Theme.of(context).colorScheme.secondary,
                   leading: Icon(Icons.info, color: colorsPrimary),
@@ -131,15 +131,15 @@ class _homeState extends State<home> {
                   ),
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => about()),
+                      MaterialPageRoute(builder: (context) => const about()),
                     );
                   },
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
                   // tileColor: Theme.of(context).colorScheme.secondary,
-                  leading: Icon(Icons.question_mark, color: Colors.indigo),
-                  title: Text(
+                  leading: const Icon(Icons.question_mark, color: Colors.indigo),
+                  title: const Text(
                     "Sign Out",
                     style: TextStyle(color: Colors.indigo),
                   ),
@@ -147,7 +147,7 @@ class _homeState extends State<home> {
                     signOut();
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => SignIn()),
+                      MaterialPageRoute(builder: (context) => const SignIn()),
                     );
                   },
                 ),
@@ -187,7 +187,7 @@ class _homeState extends State<home> {
                             itemCount: tripList.length,
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 child: GestureDetector(
                                   onTap: () {},
                                   child: Card(
@@ -233,15 +233,15 @@ class _homeState extends State<home> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: InkWell(
                                 child: ListTile(
                                   tileColor: colorsPrimary,
-                                  title: Text(
+                                  title: const Text(
                                     "Explore Trips",
                                     style: TextStyle(color: Colors.white),
                                   ),
-                                  trailing: Icon(
+                                  trailing: const Icon(
                                     Icons.add_circle,
                                     color: Colors.white,
                                   ),
@@ -250,21 +250,21 @@ class _homeState extends State<home> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Routes()),
+                                        builder: (context) => const Routes()),
                                   );
                                 },
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: InkWell(
                                 child: ListTile(
                                   tileColor: colorsPrimary,
-                                  title: Text(
+                                  title: const Text(
                                     "Requests",
                                     style: TextStyle(color: Colors.white),
                                   ),
-                                  trailing: Icon(
+                                  trailing: const Icon(
                                     Icons.add_task,
                                     color: Colors.white,
                                   ),
@@ -273,7 +273,7 @@ class _homeState extends State<home> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Requests()),
+                                        builder: (context) => const Requests()),
                                   );
                                 },
                               ),

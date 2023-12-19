@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'MyWidgets.dart';
 
 class SplashScreen extends StatefulWidget {
-  SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       fontStyle: FontStyle.italic),
                 ),
               ),
-              CircularProgressIndicator(),
+              const CircularProgressIndicator(),
             ],
           )),
         ));

@@ -38,7 +38,7 @@ class _Route2State extends State<Route2> {
                   itemCount: tripList.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(

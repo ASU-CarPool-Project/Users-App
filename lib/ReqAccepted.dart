@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'MyWidgets.dart';
-import 'RoutesDesc.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'Routes.dart';
 
 class ReqAccepted extends StatefulWidget {
   const ReqAccepted({Key? key}) : super(key: key);
@@ -20,7 +18,7 @@ class _ReqAcceptedState extends State<ReqAccepted> {
     return Container(
       color: Colors.white,
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Center(
           child: StreamBuilder(
             stream: tripsReference.onValue,
@@ -43,7 +41,7 @@ class _ReqAcceptedState extends State<ReqAccepted> {
                   itemCount: tripList.length,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Card(
                         color: colorsRoute2,
                         child: Padding(
@@ -74,14 +72,14 @@ class _ReqAcceptedState extends State<ReqAccepted> {
                               color: Colors.white,
                               child: Column(children: [
                                 ListTile(
-                                  leading: Icon(Icons.car_rental),
+                                  leading: const Icon(Icons.car_rental),
                                   title: Text(
                                       "Car: ${tripList[index].value["car"]}"),
                                   subtitle: Text(
                                       "Capacity: ${tripList[index].value["capacity"]}"),
                                 ),
                                 ListTile(
-                                  leading: Icon(Icons.person),
+                                  leading: const Icon(Icons.person),
                                   title: Text(
                                       "Name: ${tripList[index].value["name"]}"),
                                   subtitle: Text(
