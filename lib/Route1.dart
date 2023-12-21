@@ -68,7 +68,7 @@ class _Route1State extends State<Route1> {
                   },
                 );
               } else {
-                print("Errooooooooooor: ${snapshot.error}");
+                print("---------------------- Error :( ---> ${snapshot.error}");
                 return Center(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

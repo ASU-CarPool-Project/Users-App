@@ -33,64 +33,16 @@ class _RoutesDescState extends State<RoutesDesc> {
                   child: Padding(
                     padding: const EdgeInsets.all(20),
                     child: Center(
-                      child: Card(
-                        color: colorsRoute1,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(children: [
-                            Container(
-                              color: Colors.white70,
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    leading: const Icon(Icons.directions),
-                                    title: Text(
-                                        "${widget.tripData["direction"]} - ${widget.tripData["gate"]}"),
-                                    subtitle: Text(
-                                        "Route: ${widget.tripData["route"]}"),
-                                  ),
-                                  ListTile(
-                                    leading: const Icon(Icons.access_time),
-                                    title: Text(
-                                        "Time: ${widget.tripData["time"]}"),
-                                    subtitle: Text(
-                                        "Date: ${widget.tripData["date"]}"),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              color: Colors.white,
-                              child: Column(children: [
-                                ListTile(
-                                  leading: const Icon(Icons.car_rental),
-                                  title: Text("Car: ${widget.tripData["car"]}"),
-                                  subtitle: Text(
-                                      "Capacity: ${widget.tripData["capacity"]}"),
-                                ),
-                                ListTile(
-                                  leading: const Icon(Icons.person),
-                                  title: Text(
-                                      "Driver: ${widget.tripData["driver"]}"),
-                                  subtitle: Text(
-                                      "Phone: ${widget.tripData["phone"]}"),
-                                ),
-                              ]),
-                            ),
-                            Container(
-                              color: Colors.white70,
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    leading: const Icon(Icons.attach_money),
-                                    title:
-                                        Text("Fees: ${widget.tripData["fee"]}"),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ]),
-                        ),
+                      child: tripCardTrack(
+                        "${widget.tripData["direction"]} - ${widget.tripData["gate"]}",
+                        "${widget.tripData["route"]}",
+                        "${widget.tripData["time"]}",
+                        "${widget.tripData["date"]}",
+                        "${widget.tripData["car"]}",
+                        "${widget.tripData["capacity"]}",
+                        "${widget.tripData["driver"]}",
+                        "${widget.tripData["phone"]}",
+                        "${widget.tripData["fee"]}",
                       ),
                     ),
                   ),
