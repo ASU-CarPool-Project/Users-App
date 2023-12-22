@@ -50,7 +50,7 @@ class _Route1State extends State<Route1> {
                           );
                         },
                         child: Card(
-                          color: colorsRoute1,
+                          color: colorsTrips1,
                           child: ListTile(
                             tileColor: Colors.transparent,
                             leading: const Icon(

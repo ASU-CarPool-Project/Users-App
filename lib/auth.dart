@@ -16,12 +16,26 @@ Future<Map<String, dynamic>?> getUserInfo() async {
   if (user != null) {
     DocumentSnapshot<Map<String, dynamic>> userData = await FirebaseFirestore
         .instance
-        .collection('users')
+        .collection('users_driver')
         .doc(user.uid)
         .get();
     return userData.data();
   }
   return null;
+}
+
+Future<Map<String, dynamic>> fetchUserProfile() async {
+  final uid = FirebaseAuth.instance.currentUser?.uid;
+
+  if (uid != null) {
+    var userRef =
+        FirebaseFirestore.instance.collection('users_driver').doc(uid);
+    var documentSnapshot = await userRef.get();
+
+    return documentSnapshot.data() ?? {};
+  }
+
+  return {};
 }
 
 Future<void> signOut() async {

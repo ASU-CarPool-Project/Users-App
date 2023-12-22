@@ -138,7 +138,8 @@ class _homeState extends State<home> {
                 const Divider(),
                 ListTile(
                   // tileColor: Theme.of(context).colorScheme.secondary,
-                  leading: const Icon(Icons.question_mark, color: Colors.indigo),
+                  leading:
+                      const Icon(Icons.question_mark, color: Colors.indigo),
                   title: const Text(
                     "Sign Out",
                     style: TextStyle(color: Colors.indigo),
@@ -191,7 +192,7 @@ class _homeState extends State<home> {
                                 child: GestureDetector(
                                   onTap: () {},
                                   child: Card(
-                                    color: colorsRoute1,
+                                    color: colorsTrips1,
                                     child: ListTile(
                                       tileColor: Colors.transparent,
                                       leading: const Icon(
@@ -211,7 +212,7 @@ class _homeState extends State<home> {
                         } else {
                           print("Errooooooooooor: ${snapshot.error}");
                           return Card(
-                            color: colorsRoute1,
+                            color: colorsTrips1,
                             child: ListTile(
                               tileColor: Colors.transparent,
                               leading: const Icon(

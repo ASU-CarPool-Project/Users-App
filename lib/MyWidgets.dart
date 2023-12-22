@@ -2,10 +2,13 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-Color? colorsPrimary = Colors.indigo;
-Color? colorsRoute1 = Colors.indigoAccent;
-Color? colorsRoute2 = Colors.cyan;
+/// My Colors
+Color? colorsPrimary = const Color.fromRGBO(70, 54, 252, 1);
+Color? colorsTrips1 = const Color.fromRGBO(81, 112, 253, 1);
+Color? colorsTrips2 = const Color.fromRGBO(96, 171, 251, 1);
+Color? colorsCards = const Color.fromRGBO(174, 225, 252, 1);
 
+/// Text Widgets
 Widget textButtons(String text) {
   return Text(
     text,
@@ -28,7 +31,33 @@ Widget textLargeTitle(String text) {
     padding: const EdgeInsets.all(8.0),
     child: Text(
       text,
-      style: const TextStyle(fontSize: 24, color: Colors.indigo),
+      style: TextStyle(fontSize: 24, color: colorsPrimary),
+    ),
+  );
+}
+
+Widget textPlace(String label, String value) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.blue,
+          ),
+        ),
+        Text(
+          value,
+          style: const TextStyle(
+            fontSize: 18.0,
+            color: Colors.black,
+          ),
+        ),
+      ],
     ),
   );
 }
@@ -63,6 +92,7 @@ Widget textStatusDeclined(String text) {
   );
 }
 
+/// Icons
 Widget iconBack(BuildContext context) {
   return IconButton(
     icon: const Icon(
@@ -79,18 +109,20 @@ Widget iconBack(BuildContext context) {
   );
 }
 
+/// Toast Messages
 Future<bool?> toastMsg(String message) {
   return Fluttertoast.showToast(
     msg: message,
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.BOTTOM,
-    timeInSecForIosWeb: 1,
+    timeInSecForIosWeb: 4,
     backgroundColor: Colors.green,
     textColor: Colors.white,
     fontSize: 16.0,
   );
 }
 
+/// Trip Cards
 Widget tripCard(
   var currTrip,
   String? route,
@@ -104,7 +136,7 @@ Widget tripCard(
   String? fees,
 ) {
   return Card(
-    color: colorsRoute1,
+    color: colorsTrips1,
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(children: [
@@ -190,7 +222,7 @@ Widget tripCardTrack(
   String? fees,
 ) {
   return Card(
-    color: colorsRoute1,
+    color: colorsTrips1,
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(children: [

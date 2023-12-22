@@ -43,7 +43,7 @@ class _ReqAcceptedState extends State<ReqAccepted> {
                     return Padding(
                       padding: const EdgeInsets.all(10),
                       child: Card(
-                        color: colorsRoute2,
+                        color: colorsTrips2,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(children: [

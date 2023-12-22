@@ -1,18 +1,22 @@
+import 'package:asu_carpool/LocalDatabase.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'MyWidgets.dart';
+import 'auth.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+class profile extends StatefulWidget {
+  const profile({Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<profile> createState() => _profileState();
 }
 
-class _ProfileState extends State<Profile> {
-  User? _user;
+class _profileState extends State<profile> {
   Map<String, dynamic>? _userData;
+  String? connection;
+  String? name;
+  String? email;
+  String? phone;
 
   @override
   void initState() {
@@ -20,51 +24,55 @@ class _ProfileState extends State<Profile> {
     super.initState();
   }
 
-  /////////////////////////////////////////////////////////////////////////////
+  final LocalDatabase db = LocalDatabase();
+  Future<void> writingData() async {
+    final userData = await fetchUserProfile();
+    await db.write('''INSERT INTO 'USERS'
+        ('FIRST_NAME','LAST_NAME','EMAIL','PHONE') VALUES
+        ('${_userData!['firstName']}','${_userData!['lastName']}','${_userData!['email']}','${_userData!['phone']}') ''');
+  }
 
   Future<void> _getUserInfo() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      DocumentSnapshot<Map<String, dynamic>> userData = await FirebaseFirestore
-          .instance
-          .collection('users')
-          .doc(user.uid)
-          .get();
+    final isConnected = await checkConnection();
 
+    if (isConnected) {
+      // Fetch user profile data from Firestore
+      final userData = await fetchUserProfile();
       setState(() {
-        _user = user;
-        _userData = userData.data();
+        _userData = userData;
+        connection = "From Online DataBase";
+
+        name = '${_userData!['firstName']} ${_userData!['lastName']}';
+        email = _userData!['email'];
+        phone = _userData!['phone'];
       });
+      // writingData();
+      print("-------------------------> $connection, $name, $email, $phone");
+    } else {
+      // Fetch user profile data from local database
+      final response = await db.reading('''SELECT * FROM 'USERS' LIMIT 1''');
+      if (response.isNotEmpty) {
+        setState(() {
+          final userFromDB = response.first;
+          connection = "From Local Database";
+          name = '${userFromDB['FIRST_NAME']} ${userFromDB['LAST_NAME']}';
+          email = userFromDB['EMAIL'];
+          phone = userFromDB['PHONE'];
+        });
+      }
+      print("-------------------------> $connection, $name, $email, $phone");
     }
   }
 
-  Widget textPlace(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.blue,
-            ),
-          ),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 18.0,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
-    );
+  Future<bool> checkConnection() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      return true;
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      return true;
+    }
+    return false;
   }
-
-  /////////////////////////////////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -83,15 +91,10 @@ class _ProfileState extends State<Profile> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (_userData != null)
-                  textPlace(
-                      "Name: ",
-                      _userData!['firstName'] + " " + _userData!['lastName'] ??
-                          ''),
-                if (_userData != null)
-                  textPlace("Email: ", _userData!['email'] ?? ''),
-                if (_userData != null)
-                  textPlace("Phone Number: ", _userData!['phone'] ?? ''),
+                textPlace("Connection: ", connection ?? ''),
+                textPlace("Name: ", name ?? ''),
+                textPlace("Email: ", email ?? ''),
+                textPlace("Phone Number: ", phone ?? ''),
               ],
             ),
           ),

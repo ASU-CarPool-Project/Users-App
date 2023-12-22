@@ -43,6 +43,8 @@ dependencies:
   sentry_flutter: ^7.14.0
   sentry: ^7.14.0
   path: ^1.8.3
+  connectivity: ^3.0.6
+  sqflite: ^2.3.0
 
 dev_dependencies:
   flutter_test:
