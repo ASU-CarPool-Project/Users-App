@@ -132,8 +132,7 @@ class _ProfileState extends State<Profile> {
                               child: IconButton(
                                 icon: Icon(Icons.add_a_photo,
                                     color: Colors.black),
-                                onPressed:
-                                    null, // or you can remove this line entirely
+                                onPressed: null,
                               ),
                             ),
                           ),

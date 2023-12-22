@@ -1,3 +1,4 @@
+import 'package:asu_carpool/TripsHistory.dart';
 import 'package:asu_carpool/complains.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -105,6 +106,20 @@ class _homeState extends State<home> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const Profile()),
+                    );
+                  },
+                ),
+                ListTile(
+                  // tileColor: Theme.of(context).colorScheme.secondary,
+                  leading: Icon(Icons.receipt, color: colorsPrimary),
+                  title: Text(
+                    "Trips History",
+                    style: TextStyle(color: colorsPrimary),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => const TripsHistory()),
                     );
                   },
                 ),

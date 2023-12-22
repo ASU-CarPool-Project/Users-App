@@ -130,7 +130,7 @@ class _SignInState extends State<SignIn> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(3.0),
-                  child: Image.asset("assets/logos/users_carpool.jpeg",
+                  child: Image.asset("assets/logos/ASCP_User.png",
                       height: 200, width: 200),
                 ),
                 const SizedBox(

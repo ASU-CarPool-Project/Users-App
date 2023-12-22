@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 Color? colorsPrimary = const Color.fromRGBO(70, 54, 252, 1);
 Color? colorsTrips1 = const Color.fromRGBO(81, 112, 253, 1);
 Color? colorsTrips2 = const Color.fromRGBO(96, 171, 251, 1);
-Color? colorsCards = const Color.fromRGBO(174, 225, 252, 1);
+Color? colorsCards = const Color.fromRGBO(174, 100, 252, 1);
 Color? colorsAccepted = Colors.green;
 Color? colorsInservice = Colors.orange;
 Color? colorsDeclined = Colors.red;

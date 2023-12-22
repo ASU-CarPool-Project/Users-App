@@ -118,7 +118,6 @@ class _ReqDeclinedState extends State<ReqDeclined> {
                                       FirebaseDatabase.instance
                                           .ref()
                                           .child('Requests')
-                                          .child("Pending")
                                           .child(tripList[index].key!);
                                   tripToDeleteReference.remove().then((_) {
                                     print("Request Canceled successfully");
