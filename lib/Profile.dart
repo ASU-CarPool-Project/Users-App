@@ -26,7 +26,7 @@ class _ProfileState extends State<Profile> {
 
   final LocalDatabase db = LocalDatabase();
   Future<void> writingData() async {
-    final userData = await fetchUserProfile();
+    // final userData = await fetchUserProfile();
     await db.write('''INSERT INTO 'USERS'
         ('FIRST_NAME','LAST_NAME','EMAIL','PHONE') VALUES
         ('${_userData!['firstName']}','${_userData!['lastName']}','${_userData!['email']}','${_userData!['phone']}') ''');
@@ -43,8 +43,8 @@ class _ProfileState extends State<Profile> {
         connection = "From Online DataBase";
 
         name = '${_userData!['firstName']} ${_userData!['lastName']}';
-        email = _userData!['email'];
-        phone = _userData!['phone'];
+        email = _userData!['email'] ?? 'no email';
+        phone = _userData!['phone'] ?? 'no phone';
       });
       // writingData();
       print("-------------------------> $connection, $name, $email, $phone");
@@ -91,6 +91,55 @@ class _ProfileState extends State<Profile> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: 75,
+                          backgroundColor: Colors.grey.shade200,
+                          child: const CircleAvatar(
+                            radius: 70,
+                            backgroundImage: AssetImage('assets/logos/fin.png'),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 1,
+                          right: 1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 3,
+                                  color: Colors.white,
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(
+                                    50,
+                                  ),
+                                ),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: const Offset(2, 4),
+                                    color: Colors.black.withOpacity(
+                                      0.3,
+                                    ),
+                                    blurRadius: 3,
+                                  ),
+                                ]),
+                            child: const Padding(
+                              padding: EdgeInsets.all(2.0),
+                              child: IconButton(
+                                icon: Icon(Icons.add_a_photo,
+                                    color: Colors.black),
+                                onPressed:
+                                    null, // or you can remove this line entirely
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
                 textPlace("Connection: ", connection ?? ''),
                 textPlace("Name: ", name ?? ''),
                 textPlace("Email: ", email ?? ''),
