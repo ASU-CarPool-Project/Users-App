@@ -50,18 +50,6 @@ class _SignUpState extends State<SignUp> {
         'phone': _controllerPhone.text,
       });
 
-      print("Verification email sent to ${userCredential.user!.email}");
-      Fluttertoast.showToast(
-        msg:
-            "Verification email sent to ${userCredential.user!.email}. Please check your email and verify your account.",
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 4,
-        backgroundColor: Colors.green,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-
       // Reset the form after successful signup
       _formKey.currentState!.reset();
       // If sign-up is successful, navigate to home
@@ -92,7 +80,7 @@ class _SignUpState extends State<SignUp> {
       appBar: AppBar(
         backgroundColor: colorsPrimary,
         leading: iconBack(context),
-        title: textPageTitle("ASU CAR POOL - Driver"),
+        title: textPageTitle("Sign Up"),
         centerTitle: true,
       ),
       body: Container(
@@ -102,16 +90,6 @@ class _SignUpState extends State<SignUp> {
           child: Center(
             child: ListView(
               children: [
-                Center(
-                  child: Text(
-                    "Sign up",
-                    style: TextStyle(
-                      fontSize: 34,
-                      fontWeight: FontWeight.bold,
-                      color: colorsPrimary,
-                    ),
-                  ),
-                ),
                 Padding(
                     padding: const EdgeInsets.all(20),
                     child: Form(
@@ -123,7 +101,7 @@ class _SignUpState extends State<SignUp> {
                               filled: true,
                               fillColor: Colors.white70,
                               hintText: "First Name",
-                              icon: Icon(Icons.face_2),
+                              icon: Icon(Icons.tag_faces),
                             ),
                             controller: _controllerFirstName,
                             validator: (value) {
@@ -142,7 +120,7 @@ class _SignUpState extends State<SignUp> {
                               filled: true,
                               fillColor: Colors.white70,
                               hintText: "Last Name",
-                              icon: Icon(Icons.face),
+                              icon: Icon(Icons.tag_faces_rounded),
                             ),
                             controller: _controllerLastName,
                             validator: (value) {

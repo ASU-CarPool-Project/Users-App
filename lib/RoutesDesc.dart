@@ -33,7 +33,7 @@ class _RoutesDescState extends State<RoutesDesc> {
                   child: Padding(
                     padding: const EdgeInsets.all(20),
                     child: Center(
-                      child: tripCardTrack(
+                      child: tripCardWithoutMethod(
                         "${widget.tripData["direction"]} - ${widget.tripData["gate"]}",
                         "${widget.tripData["route"]}",
                         "${widget.tripData["time"]}",

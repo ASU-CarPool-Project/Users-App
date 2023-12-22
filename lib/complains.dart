@@ -31,8 +31,10 @@ class _complainsState extends State<complains> {
           padding: const EdgeInsets.all(20),
           child: Center(
             child: StreamBuilder(
-              stream:
-                  tripsReference.orderByChild("userID").equalTo(userID).onValue,
+              stream: tripsReference
+                  .orderByChild("driverID")
+                  .equalTo(userID)
+                  .onValue,
               builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                 if (snapshot.hasData &&
                     !snapshot.hasError &&
@@ -54,33 +56,54 @@ class _complainsState extends State<complains> {
                       return Padding(
                         padding: const EdgeInsets.all(10),
                         child: Card(
-                          color: Colors.yellow,
+                          color: colorsComplain,
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
-                            child: Row(
+                            child: Column(
                               children: [
-                                const Icon(
-                                  Icons.pin_drop_sharp,
-                                  color: Colors.white,
-                                ),
-                                const SizedBox(width: 5),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Row(
                                   children: [
+                                    const Icon(Icons.directions,
+                                        color: Colors.white),
+                                    const SizedBox(width: 10),
                                     textPageTitle(
-                                        "Route: ${tripList[index].value["route"]}"),
-                                    textPageTitle(
-                                        "${tripList[index].value["date"]} / ${tripList[index].value["time"]}"),
-                                    textPageTitle(
-                                        "Driver: ${tripList[index].value["driver"]}"),
-                                    textPageTitle(
-                                        "Complain: ${tripList[index].value["complain"]}"),
+                                        "${tripList[index].value["direction"]} - ${tripList[index].value["gate"]}")
                                   ],
                                 ),
-                                const Spacer(),
-                                IconButton(
-                                  icon: const Icon(Icons.check),
-                                  onPressed: () {},
+                                Row(
+                                  children: [
+                                    const Icon(Icons.pin_drop_sharp,
+                                        color: Colors.white),
+                                    const SizedBox(width: 10),
+                                    textPageTitle(
+                                        "District: ${tripList[index].value["route"]}"),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.access_time,
+                                        color: Colors.white),
+                                    const SizedBox(width: 10),
+                                    textPageTitle(
+                                        "${tripList[index].value["date"]} / ${tripList[index].value["time"]}"),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.face, color: Colors.white),
+                                    const SizedBox(width: 10),
+                                    textPageTitle(
+                                        "Client: ${tripList[index].value["driver"]}"),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.info_outline_rounded,
+                                        color: Colors.white),
+                                    const SizedBox(width: 10),
+                                    textPageTitle(
+                                        "${tripList[index].value["complain"]}"),
+                                  ],
                                 ),
                               ],
                             ),
