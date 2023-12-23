@@ -1,15 +1,15 @@
-import 'package:asu_carpool/TripsHistory.dart';
-import 'package:asu_carpool/complains.dart';
+import 'package:asu_carpool/View/TripsHistory.dart';
+import 'package:asu_carpool/View/complains.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'MyWidgets.dart';
+import '../Model/MyWidgets.dart';
 import 'Profile.dart';
 import 'Requests.dart';
 import 'SignIn.dart';
 import 'about.dart';
-import 'auth.dart';
+import '../Model/auth.dart';
 import 'Routes.dart';
 
 String username = "";

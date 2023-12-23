@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'MyWidgets.dart';
+import '../Model/MyWidgets.dart';
 import 'package:firebase_database/firebase_database.dart';
-import "home.dart";
+import 'home.dart';
 
 String myResponse = "";
 

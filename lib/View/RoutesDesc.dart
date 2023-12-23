@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:asu_carpool/MyWidgets.dart';
+import 'package:asu_carpool/Model/MyWidgets.dart';
 import 'Routes.dart';
 
 class RoutesDesc extends StatefulWidget {

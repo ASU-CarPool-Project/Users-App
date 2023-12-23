@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:asu_carpool/Route1.dart';
-import 'package:asu_carpool/Route2.dart';
-import 'MyWidgets.dart';
+import 'package:asu_carpool/View/Route1.dart';
+import 'package:asu_carpool/View/Route2.dart';
+import '../Model/MyWidgets.dart';
 
 String username = "";
 String phone = "";

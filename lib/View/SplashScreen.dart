@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'MyWidgets.dart';
+import '../Model/MyWidgets.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
         home: Scaffold(
           body: Center(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
                 child: Text(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'MyWidgets.dart';
+import '../Model/MyWidgets.dart';
 
 class about extends StatefulWidget {
   const about({Key? key}) : super(key: key);

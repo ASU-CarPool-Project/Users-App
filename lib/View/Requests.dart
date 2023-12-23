@@ -1,7 +1,7 @@
-import 'package:asu_carpool/ReqAccepted.dart';
-import 'package:asu_carpool/ReqDeclined.dart';
+import 'package:asu_carpool/View/ReqAccepted.dart';
+import 'package:asu_carpool/View/ReqDeclined.dart';
 import 'package:flutter/material.dart';
-import 'MyWidgets.dart';
+import '../Model/MyWidgets.dart';
 import 'ReqPending.dart';
 
 class Requests extends StatefulWidget {

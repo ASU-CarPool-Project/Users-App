@@ -1,8 +1,8 @@
-import 'package:asu_carpool/LocalDatabase.dart';
+import 'package:asu_carpool/Controller/LocalDatabase.dart';
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
-import 'MyWidgets.dart';
-import 'auth.dart';
+import '../Model/MyWidgets.dart';
+import '../Model/auth.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
