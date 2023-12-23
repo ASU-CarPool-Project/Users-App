@@ -108,7 +108,7 @@ class _TripsHistoryState extends State<TripsHistory> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        textLargeTitle("No Complains Found"),
+                        textLargeTitle("Your ended trips will appear here"),
                         // const CircularProgressIndicator(),
                       ],
                     ),

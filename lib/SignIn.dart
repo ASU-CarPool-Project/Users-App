@@ -27,7 +27,7 @@ class _SignInState extends State<SignIn> {
           password: controllerPassword.text);
 
       // If sign-in is successful, navigate to the next screen (Routes)
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const home()),
       );

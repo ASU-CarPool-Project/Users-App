@@ -31,10 +31,8 @@ class _complainsState extends State<complains> {
           padding: const EdgeInsets.all(20),
           child: Center(
             child: StreamBuilder(
-              stream: tripsReference
-                  .orderByChild("driverID")
-                  .equalTo(userID)
-                  .onValue,
+              stream:
+                  tripsReference.orderByChild("userID").equalTo(userID).onValue,
               builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
                 if (snapshot.hasData &&
                     !snapshot.hasError &&
@@ -93,7 +91,7 @@ class _complainsState extends State<complains> {
                                     const Icon(Icons.face, color: Colors.white),
                                     const SizedBox(width: 10),
                                     textPageTitle(
-                                        "Client: ${tripList[index].value["driver"]}"),
+                                        "Driver: ${tripList[index].value["driver"]}"),
                                   ],
                                 ),
                                 Row(
